@@ -270,7 +270,7 @@ __metadata:
     "@fontsource-variable/recursive": "npm:^5.1.0"
     "@fontsource-variable/roboto-flex": "npm:^5.1.0"
     "@fontsource/roboto": "npm:^5.1.0"
-    "@star4/react": "npm:^0.1.5"
+    "@star4/react": "npm:^0.1.6"
     "@star4/vanilla-extract": "npm:^0.0.14"
     "@tanstack/react-router": "npm:^1.82.2"
     "@tanstack/router-devtools": "npm:^1.82.2"
@@ -287,7 +287,7 @@ __metadata:
     react: "npm:^18.3.1"
     react-dom: "npm:^18.3.1"
     sass-embedded: "npm:^1.81.0"
-    typescript: "npm:^5.6.3"
+    typescript: "npm:^5.7.2"
     vercel: "npm:^39.1.1"
     vite: "npm:^5.4.11"
   languageName: unknown
@@ -1114,9 +1114,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@star4/react@npm:^0.1.5":
-  version: 0.1.5
-  resolution: "@star4/react@npm:0.1.5"
+"@star4/react@npm:^0.1.6":
+  version: 0.1.6
+  resolution: "@star4/react@npm:0.1.6"
   dependencies:
     "@floating-ui/dom": "npm:^1.6.12"
     "@floating-ui/react": "npm:^0.26.28"
@@ -1131,7 +1131,7 @@ __metadata:
     lenis: "npm:^1.1.16"
     react: "npm:^18.3.1"
     react-dom: "npm:^18.3.1"
-  checksum: 10c0/2a9d704717e6b854737866217cb2058444c1ace6bdf906c30c2641953005bc26b9a4a9c43b509ad7eac4bf6d9b02af29721800d86613acd52507c835080f281f
+  checksum: 10c0/3b348d5a466cd6f6d8926eebf11fc9da079e4a0b9e30c3c4f4f0fbb2a4965b13d77a7c23b71b98ee4dbc44bf8e8e5f3ff2e5d98cf604593abfad38c20fdfdde7
   languageName: node
   linkType: hard
 
@@ -5371,13 +5371,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:^5.6.3":
-  version: 5.6.3
-  resolution: "typescript@npm:5.6.3"
+"typescript@npm:^5.7.2":
+  version: 5.7.2
+  resolution: "typescript@npm:5.7.2"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: 10c0/44f61d3fb15c35359bc60399cb8127c30bae554cd555b8e2b46d68fa79d680354b83320ad419ff1b81a0bdf324197b29affe6cc28988cd6a74d4ac60c94f9799
+  checksum: 10c0/a873118b5201b2ef332127ef5c63fb9d9c155e6fdbe211cbd9d8e65877283797cca76546bad742eea36ed7efbe3424a30376818f79c7318512064e8625d61622
   languageName: node
   linkType: hard
 
@@ -5391,13 +5391,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@npm%3A^5.6.3#optional!builtin<compat/typescript>":
-  version: 5.6.3
-  resolution: "typescript@patch:typescript@npm%3A5.6.3#optional!builtin<compat/typescript>::version=5.6.3&hash=8c6c40"
+"typescript@patch:typescript@npm%3A^5.7.2#optional!builtin<compat/typescript>":
+  version: 5.7.2
+  resolution: "typescript@patch:typescript@npm%3A5.7.2#optional!builtin<compat/typescript>::version=5.7.2&hash=5786d5"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: 10c0/7c9d2e07c81226d60435939618c91ec2ff0b75fbfa106eec3430f0fcf93a584bc6c73176676f532d78c3594fe28a54b36eb40b3d75593071a7ec91301533ace7
+  checksum: 10c0/f3b8082c9d1d1629a215245c9087df56cb784f9fb6f27b5d55577a20e68afe2a889c040aacff6d27e35be165ecf9dca66e694c42eb9a50b3b2c451b36b5675cb
   languageName: node
   linkType: hard
 
