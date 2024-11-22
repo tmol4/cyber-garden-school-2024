@@ -1,0 +1,6 @@
+{
+  "private": true,
+  "name": "@cgs/backend",
+  "type": "module",
+  "packageManager": "yarn@4.5.2"
+}

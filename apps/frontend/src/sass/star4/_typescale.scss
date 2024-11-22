@@ -1,0 +1,33 @@
+@use "sass:map";
+@use "sass:list";
+
+@function values() {
+  @return (
+    display: (
+      large: "display-large",
+      medium: "display-medium",
+      small: "display-small",
+    ),
+    headline: (
+      large: "headline-large",
+      medium: "headline-medium",
+      small: "headline-small",
+    ),
+    title: (
+      large: "title-large",
+      medium: "title-medium",
+      small: "title-small",
+    ),
+    body: (
+      large: "body-large",
+      medium: "body-medium",
+      small: "body-small",
+    ),
+    label: (
+      large: "label-large",
+      medium: "label-medium",
+      small: "label-small",
+    ),
+  );
+}
+

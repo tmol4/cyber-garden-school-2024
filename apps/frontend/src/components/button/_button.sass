@@ -1,0 +1,38 @@
+@use "../../sass/star4"
+
+.button
+  border-radius: 11rem
+  display: flex
+  align-items: center
+  justify-content: center
+  min-width: 25rem
+  min-height: 9rem
+  grid-row: 0/1
+  grid-column: 2/3
+  @include star4.layout(compact, compact)
+    max-width: 15rem
+    min-height: 3rem
+  &__text
+    display: inline-block
+    font-family: Jura
+    font-size: 3.6rem
+    color: star4.color(on-surface)
+    @include star4.layout(compact, compact)
+      font-size: 2.5rem
+  &__green
+    border: .1rem star4.color(primary) solid
+  @media (hover: hover)
+    &:hover
+      background-color: star4.color(primary)
+      color: star4.color(on-primary)
+      transition: all .05s
+      & *
+        color: star4.color(on-primary)
+  @media (hover: none)
+    &:active
+      background-color: star4.color(primary)
+      color: star4.color(on-primary)
+      transition: all .05s
+      & *
+        color: star4.color(on-primary)
+

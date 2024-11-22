@@ -1,0 +1,40 @@
+@use "../sass/star4"
+
+*, *::before, *::after
+  box-sizing: border-box
+  margin: 0
+  padding: 0
+
+html
+  -webkit-text-size-adjust: none
+  -moz-text-size-adjust: none
+  text-size-adjust: none
+
+body
+  min-height: 100vh
+  min-height: 100dvh
+
+  color-scheme: light dark
+  background-color: star4.color(surface)
+
+  -webkit-font-smoothing: antialiased
+  @include star4.typescale(body, large)
+  color: star4.color(on-surface)
+
+h1, h2, h3, h4 // TODO: decide whether to include h5 and h6. ref: https://piccalil.li/blog/a-more-modern-css-reset/
+  text-wrap: balance
+
+p, li, figcaption
+  text-wrap: pretty
+
+
+ul[role="list"], ol[role="list"]
+  list-style: none
+
+img, picture, video, canvas, svg
+  max-width: 100%
+  display: block
+
+// https://www.joshwcomeau.com/css/custom-css-reset/
+#root // TODO: add something like #__next
+  isolation: isolate
