@@ -21,7 +21,9 @@ def get_data():
     print(data)
 
     if not data:
-        return get_random_event().to_json()
+        event_json = get_random_event().to_json()
+        print(event_json)
+        return event_json
 
 
 if __name__ == '__main__':
