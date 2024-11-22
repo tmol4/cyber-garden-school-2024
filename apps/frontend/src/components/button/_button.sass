@@ -1,7 +1,7 @@
 $onSurface: var(--star4-color-on-surface)
 $onSurfaceVariant: var(--star4-color-on-surface-variant)
 $onPrimary: var(--star4-color-on-primary)
-@use "../sass/main.sass"
+@use "../../sass/main.sass"
 
 
 @font-face
@@ -29,18 +29,34 @@ $onPrimary: var(--star4-color-on-primary)
       font-size: 2.5rem
   &__green
     border: .1rem var(--star4-color-primary) solid
-  @media (hover: hover)
-    &:hover
-      background-color: var(--star4-color-primary)
-      color: $onPrimary
-      transition: all .05s
-      & *
+    @media (hover: hover)
+      &:hover
+        background-color: var(--star4-color-primary)
         color: $onPrimary
-  @media (hover: none)
-    &:active
-      background-color: var(--star4-color-primary)
-      color: $onPrimary
-      transition: all .05s
-      & *
+        transition: all .05s
+        & *
+          color: $onPrimary
+    @media (hover: none)
+      &:active
+        background-color: var(--star4-color-primary)
         color: $onPrimary
+        transition: all .05s
+        & *
+          color: $onPrimary
+  &__red
+    border: .1rem rgba(#E33045, 0.3) solid
+    @media (hover: hover)
+      &:hover
+        background-color: rgba(#E33045, 0.3)
+        color: $onPrimary
+        transition: all .05s
+        & *
+          color: $onPrimary
+    @media (hover: none)
+      &:active
+        background-color: rgba(#E33045, 0.3)
+        color: $onPrimary
+        transition: all .05s
+        & *
+          color: $onPrimary
 

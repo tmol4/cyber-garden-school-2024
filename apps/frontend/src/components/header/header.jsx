@@ -1,5 +1,5 @@
 import { memo } from "react";
-import { QuestionMenu } from "../questionMenu";
+import { QuestionMenu } from "../questionMenu/questionMenu";
 import "./_header.sass";
 
 const HeaderComponent = function Header() {

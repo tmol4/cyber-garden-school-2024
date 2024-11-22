@@ -1,12 +1,22 @@
 import { memo, useContext } from "react";
 import "./questionMenu.sass";
-import { appContext } from "../app";
+import { appContext } from "../../app";
 
 const QuestionMenuComponent = function QuestionMenu() {
-  const { page, setPage } = useContext(appContext)
+  const { page, setPage, setCurrentState, currentState } = useContext(appContext)
+
   return (
     <div className="question-menu">
-      <p onClick={() => {setPage("Book")}}>?</p>
+      <p onClick={() => {
+        setCurrentState({
+          currentPage: page,
+          balance: currentState.balance,
+          insurance: currentState.insurance,
+          transport: currentState.transport,
+          toTheEnd: currentState.toTheEnd,
+        })
+        setPage("Book")}
+        }>?</p>
     </div>
   );
 };

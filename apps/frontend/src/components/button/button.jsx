@@ -3,12 +3,12 @@ import clsx from "clsx";
 import './_button.sass'
 
 const ButtonComponent = function Button(props) {
-  const { color, text } = props;
+  const { color, text, ...rest } = props;
   return (
     <div className={clsx({
     "button": true,
     [`button__${color}`]: color,
-    })}>
+    })} {...rest}>
       <div className="button__text">{text}</div>
     </div>
   );
