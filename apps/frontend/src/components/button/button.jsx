@@ -9,7 +9,7 @@ const ButtonComponent = function Button(props) {
     "button": true,
     [`button__${color}`]: color,
     })} {...rest}>
-      <div className="button__text">{text}</div>
+      <div className="button__text"><p>{text}</p></div>
     </div>
   );
 };

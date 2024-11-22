@@ -9,23 +9,33 @@ const QuestionComponent = function Question({
   insurance,
   currentTransport,
   buttons,
+  text,
+  buttonText1,
+  buttonText2,
+  buttonText3,
+  actionButton1,
+  actionButton2,
+  actionButton3,
 }) {
   let mas = [];
   for (let i = 0; i < buttons; i++) {
-    mas.push(<Button color="red" text="TEXT"/>);
+    mas.push(<Button color="red" text="Инвестировать в новую компанию" onClick={i == 1 ? actionButton1 : i == 2 ? actionButton2 : actionButton3} />);
   }
   return (
-    <>
+    <div className="question-div">
       <Header />
       <Statistics
         currentMoney={currentMoney}
         currentTransport={currentTransport}
         insurance={insurance}
       />
-      <div className="buttonsContainer">
+      <div className="question-div__event">
+        <h1 className="question-div__text">{text}</h1>
+      </div>
+      <div className="question-div__buttons">
         {mas}
       </div>
-    </>
+    </div>
   );
 };
 

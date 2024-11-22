@@ -17,6 +17,7 @@ $onPrimary: var(--star4-color-on-primary)
   max-height: 9rem
   grid-row: 0/1
   grid-column: 2/3
+  padding: 1.2rem
   @include main.responde(mobile-low)
     max-width: 15rem
     min-height: 3rem
@@ -27,6 +28,8 @@ $onPrimary: var(--star4-color-on-primary)
     color: $onSurface
     @include main.responde(mobile-low)
       font-size: 2.5rem
+    & p
+      text-wrap: pretty
   &__green
     border: .1rem var(--star4-color-primary) solid
     @media (hover: hover)
