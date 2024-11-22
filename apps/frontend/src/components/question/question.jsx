@@ -28,16 +28,15 @@ const QuestionComponent = function Question() {
               : i == 2
               ? currentState.id2
               : currentState.id3;
-          fetch("http://localhost:4000/", {
+           const response = await fetch("http://localhost:5000/event", {
             method: "POST",
             headers: {
               "Content-type": "application/json; charset=UTF-8",
             },
-            body: JSON.stringify({
-              currentMoney: currentState.currentMoney,
-              idToSend,
-            }),
+            body: JSON.stringify({}),
           });
+
+          console.log(response)
           setTime(time - 1);
           setCurrentState({
             currentPage: "question",
