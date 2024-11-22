@@ -1,0 +1,48 @@
+@use "~/sass/star4"
+
+.header
+  position: sticky
+  top: 0
+  left: 0
+  right: 0
+
+  height: 64px
+  background-color: star4.color(surface)
+  z-index: 1
+
+  transition-property: background-color
+  transition-duration: star4.duration(short4)
+  transition-timing-function: linear
+
+  padding-inline: 16px
+
+  &--scrolled-under
+    background-color: star4.color(surface-variant)
+
+  &__content
+    margin-inline: auto
+    max-width: 840px
+    height: 100%
+    display: flex
+    align-items: center
+    justify-content: flex-start
+    gap: 16px
+  &__leading
+    display: flex
+    align-items: center
+    justify-content: center
+    gap: 8px
+
+    color: star4.color(on-surface)
+  &__headline
+    flex-grow: 1
+    @include star4.typescale(title, large)
+    color: star4.color(on-surface)
+    text-overflow: ellipsis
+  &__trailing
+    display: flex
+    align-items: center
+    justify-content: center
+    gap: 8px
+
+    color: star4.color(on-surface-variant)

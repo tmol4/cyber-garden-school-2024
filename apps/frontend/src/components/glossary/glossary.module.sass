@@ -1,0 +1,122 @@
+@use "~/sass/star4"
+
+
+$corner: 56px
+$backdrop-color: star4.color(surface)
+$shade-color: star4.color(surface-container)
+
+@keyframes backdrop-filter-enter
+  from
+    backdrop-filter: blur(0px)
+  to
+    backdrop-filter: blur(8px)
+
+@keyframes backdrop-opacity-enter
+  from
+    background-color: transparent
+  to
+    background-color: $backdrop-color
+
+.backdrop
+  position: absolute
+  inset: 0
+
+  backdrop-filter: blur(8px)
+  background-color: $backdrop-color
+
+  z-index: 1
+
+  &--entering
+    animation-name: backdrop-filter-enter, backdrop-opacity-enter
+    animation-delay: 0ms
+    animation-duration: 150ms
+    animation-timing-function: linear
+    animation-fill-mode: both
+  &--exiting
+    animation-name: backdrop-filter-enter, backdrop-opacity-enter
+    animation-duration: 200ms
+    animation-timing-function: star4.easing(emphasized-accelerate)
+    animation-direction: reverse
+    animation-fill-mode: both
+
+@keyframes shade-enter
+  from
+    bottom: 100%
+    transform: translateY(calc(-1 * $corner))
+  to
+    bottom: 0
+    transform: translateY(0)
+
+@keyframes corner-enter
+  from
+    transform: scale(1)
+  to
+    transform: scale(0)
+
+.shade
+  position: absolute
+  inset: 0
+  background-color: $shade-color
+
+  overflow: hidden
+  z-index: 2
+
+  &::before
+    content: ""
+    position: absolute
+    top: 100%
+    left: 0
+    width: $corner
+    height: $corner
+    transform-origin: top left
+    background-color: $shade-color
+    mask-image: radial-gradient($corner at 100% 100%, #0000 99%, #000 101%)
+
+  &::after
+    content: ""
+    position: absolute
+    top: 100%
+    right: 0
+    width: $corner
+    height: $corner
+    transform-origin: top right
+    background-color: $shade-color
+    mask-image: radial-gradient($corner at 0% 100%, #0000 99%, #000 101%)
+
+  &--entering
+    animation-name: shade-enter
+    animation-duration: 600ms
+    animation-timing-function: star4.easing(emphasized)
+    animation-fill-mode: both
+    overflow: visible
+
+    &::before, &::after
+      animation-name: corner-enter
+      animation-duration: 600ms
+      animation-timing-function: star4.easing(emphasized-accelerate)
+      animation-fill-mode: both
+
+  &--exiting
+    animation-name: shade-enter
+    animation-duration: 200ms
+    animation-timing-function: star4.easing(emphasized)
+    animation-direction: reverse
+    animation-fill-mode: both
+    overflow: visible
+
+    &::before, &::after
+      animation-name: corner-enter
+      animation-duration: 200ms
+      animation-timing-function: star4.easing(emphasized-accelerate)
+      animation-direction: reverse
+      animation-fill-mode: both
+
+  &__scroller
+    position: absolute
+    inset: 0
+    overflow-x: hidden
+    overflow-y: scroll
+
+  &__header
+    &#{&}
+      background-color: $shade-color
