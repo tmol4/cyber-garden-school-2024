@@ -20,7 +20,7 @@
     "@fontsource-variable/recursive": "^5.1.0",
     "@fontsource-variable/roboto-flex": "^5.1.0",
     "@fontsource/roboto": "^5.1.0",
-    "@star4/react": "^0.1.4",
+    "@star4/react": "^0.1.5",
     "@star4/vanilla-extract": "^0.0.14",
     "@tanstack/react-router": "^1.82.2",
     "@vanilla-extract/css": "^1.16.0",
