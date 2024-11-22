@@ -23,8 +23,8 @@ export const { contract, theme } = createTheme({
     sourceColor: "#3aaa35",
   },
   typeface: {
-    brand: fontFamily(fontSource("Recursive"), fontSource("Roboto Flex"), "Helvetica", "sans-serif"),
     plain: fontFamily(fontSource("Open Sans"), fontSource("Roboto Flex"), "Roboto",  "system-ui", "Arial", "sans-serif"),
+    brand: fontFamily(fontSource("Roboto Flex"), fontSource("Manrope"), fontSource("Raleway"), "Helvetica", "sans-serif"),
   },
   component: {
     materialSymbol: {

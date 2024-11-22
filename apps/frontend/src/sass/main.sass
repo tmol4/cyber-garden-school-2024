@@ -1,2 +1,15 @@
+$onSurface: var(--star4-color-on-surface)
+$onSurfaceVariant: var(--star4-color-on-surface-variant)
+$surface: var(--star4-color-surface)
+
+@mixin responde($screen)
+  @if $screen == "mobile-low"
+    @media screen and (max-width: 350px)
+        @content
+
+
 html
   font-size: 62.5%
+
+body
+  background-color: white

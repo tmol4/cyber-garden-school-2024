@@ -1,4 +1,12 @@
-@use "../../sass/star4"
+$onSurface: var(--star4-color-on-surface)
+$onSurfaceVariant: var(--star4-color-on-surface-variant)
+$onPrimary: var(--star4-color-on-primary)
+@use "../sass/main.sass"
+
+
+@font-face
+  font-family: Jura
+  src: url("../fonts/Jura.ttf")
 
 .button
   border-radius: 11rem
@@ -6,33 +14,33 @@
   align-items: center
   justify-content: center
   min-width: 25rem
-  min-height: 9rem
+  max-height: 9rem
   grid-row: 0/1
   grid-column: 2/3
-  @include star4.layout(compact, compact)
+  @include main.responde(mobile-low)
     max-width: 15rem
     min-height: 3rem
   &__text
     display: inline-block
     font-family: Jura
     font-size: 3.6rem
-    color: star4.color(on-surface)
-    @include star4.layout(compact, compact)
+    color: $onSurface
+    @include main.responde(mobile-low)
       font-size: 2.5rem
   &__green
-    border: .1rem star4.color(primary) solid
+    border: .1rem var(--star4-color-primary) solid
   @media (hover: hover)
     &:hover
-      background-color: star4.color(primary)
-      color: star4.color(on-primary)
+      background-color: var(--star4-color-primary)
+      color: $onPrimary
       transition: all .05s
       & *
-        color: star4.color(on-primary)
+        color: $onPrimary
   @media (hover: none)
     &:active
-      background-color: star4.color(primary)
-      color: star4.color(on-primary)
+      background-color: var(--star4-color-primary)
+      color: $onPrimary
       transition: all .05s
       & *
-        color: star4.color(on-primary)
+        color: $onPrimary
 

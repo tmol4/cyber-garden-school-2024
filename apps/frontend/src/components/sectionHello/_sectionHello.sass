@@ -1,0 +1,53 @@
+$onSurface: var(--star4-color-on-surface)
+$onSurfaceVariant: var(--star4-color-on-surface-variant)
+$surface: var(--star4-color-surface)
+@use "../../sass/main.sass"
+
+@font-face
+  font-family: Jura
+  src: url("../fonts/Jura.ttf")
+
+.sectionHello
+  width: 100vw
+  height: 100vh
+  display: grid
+  grid-template-rows: 7rem minmax(64rem, 70rem) minmax(20rem, 25rem)
+  grid-template-columns: minmax(35rem, 79rem)
+  @include main.responde(mobile-low)
+    grid-template-rows: 6rem minmax(40rem, 50rem) minmax(5rem, 10rem)
+    grid-template-columns: minmax(27rem, 45rem)
+  &__button
+    display: grid
+    grid-template-rows: 10rem
+    grid-template-columns: 2fr 3fr 2fr
+    @include main.responde(mobile-low)
+      grid-template-columns: 2fr 2fr 2fr
+      grid-template-rows: 6rem
+
+
+.header
+  padding: 2rem
+  grid-row: 0/1
+  display: flex
+  justify-content: space-between
+  align-items: center
+  border: solid gray .2rem
+  &__h1
+    font-family: Arial Black
+    font-size: 2.4rem
+    color: $onSurfaceVariant
+    @include main.responde(mobile-low)
+      font-size: 2rem
+
+.main-section
+  padding: 5rem 3.5rem 0 3.5rem
+  &__text
+    font-family: Jura
+    font-size: 4rem
+    line-height: 118%
+    font-weight: 400
+    margin-bottom: 3rem
+    color: $onSurface
+    @include main.responde(mobile-low)
+      font-size: 2.8rem
+

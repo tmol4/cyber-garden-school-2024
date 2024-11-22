@@ -20,10 +20,6 @@
     "strict": true,
     "noImplicitOverride": true,
     "forceConsistentCasingInFileNames": true,
-
-    "paths": {
-      "~/*": ["./src/*"],
-    },
   },
   "include": ["src"]
 }
