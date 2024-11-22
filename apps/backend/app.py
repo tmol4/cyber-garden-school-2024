@@ -1,20 +1,22 @@
 from flask import Flask, request, jsonify
+from random import randrange
+from events import events
 
 app = Flask(__name__)
 
 
-sobytie = {
-    "data": 10
-}
+def get_random_event():
+    randindex = randrange(0, len(events))
+    return events[randindex]
 
-@app.route('/data', methods=['GET'])
+
+@app.route('/event', methods=['POST'])
 def get_data():
-    print(request.get_json())
+    data = request.get_json()
+    print(data)
 
-    data = request.get_json().get("data")
-
-    if data:
-        return sobytie
+    if not data:
+        return get_random_event().to_json()
 
 
 if __name__ == '__main__':

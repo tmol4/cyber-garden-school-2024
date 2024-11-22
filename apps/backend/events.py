@@ -1,33 +1,33 @@
 from classes import Event, Answer
 
-events = {
-    "1": Event(
-        description="",
-        minus_money=0,
-        answers={
-            "1": Answer(
+events = [
+    Event(
+        description="Зарплата",
+        delta_money=1000,
+        answers=[
+            Answer(
                 text="Да",
                 chance_bad=50
             ),
-            "2": Answer(
+            Answer(
                 text="Нет",
                 chance_bad=50
             )
-        }
+        ]
     ),
-    "2": Event(
+    Event(
         description="",
-        minus_money=0,
-        answers={
-            "1": Answer(
+        answers=[
+            Answer(
                 text="Да",
-                chance_bad=50
+                chance_bad=50,
+                delta_money=10
             ),
-            "2": Answer(
+            Answer(
                 text="Нет",
                 chance_bad=50
             )
-        }
+        ]
     )
-}
+]
 

@@ -17,7 +17,6 @@ def close_db():
     DB.conn.close()
 
 
-
 # cursor.execute('''INSERT INTO users (money) VALUES (35000)''')
 
 # data = cursor.execute('''SELECT * FROM users''')
