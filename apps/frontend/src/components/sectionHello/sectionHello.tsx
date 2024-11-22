@@ -8,13 +8,13 @@ import img from "../../img/sectionHello.png";
 
 const SectionHelloComponent = function SectionHello() {
   let { page, setPage, setCurrentState } = useContext(appContext);
-  console.log(Math.round(Math.random()))
+  console.log(Math.round(Math.random()));
   return (
     <div className="sectionHello">
       <Header />
       <section className="main-section">
         <h2 className="main-section__text">
-          Игра по финансовой грамотности: умеете ли вы распоряжаться деньгами
+          Игра по финансовой грамотности: умеете ли вы распоряжаться деньгами
         </h2>
         <img src={img}></img>
       </section>
@@ -25,10 +25,19 @@ const SectionHelloComponent = function SectionHello() {
           onClick={() => {
             setCurrentState({
               currentPage: "question",
-              balance: Math.round(Math.random() * 1000),
-              insurance: Math.round(Math.random()),
-              transport: Math.round(Math.random()),
-              toTheEnd: 0,})
+              balance: 1230,
+              insurance: 0,
+              transport: "trolley",
+              toTheEnd: 50,
+              buttonText1: "TEST text TEST text TEST text",
+              buttonText2: "TEST text",
+              buttonText3: "TEST text",
+              id1: -1,
+              id2: -2,
+              id3: -3,
+              text: "TEST text",
+              buttons: 3,
+            });
             setPage("question");
           }}
         />

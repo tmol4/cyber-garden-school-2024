@@ -1,11 +1,15 @@
 import { memo } from "react";
-import "./_statistics.sass"
+import "./_statistics.sass";
 import cash from "./../../img/cash.png";
-import trolley from './../../img/trolley.png'
-import car from './../../img/car.png'
-import ins from './../../img/ins.png'
+import trolley from "./../../img/trolley.png";
+import car from "./../../img/car.png";
+import clock from "./../../img/clock.png";
 
-const StatisticsComponent = function Statistics({ currentMoney, currentTransport, insurance }) {
+const StatisticsComponent = function Statistics({
+  currentMoney,
+  currentTransport,
+  time,
+}) {
   return (
     <div className="statistics-bar">
       <div className="statistics-bar__money">
@@ -13,11 +17,14 @@ const StatisticsComponent = function Statistics({ currentMoney, currentTransport
         <img src={cash} className="statistics-bar__img_1"></img>
       </div>
       <div className="statistics-bar__insurance">
-        <img src={ins} className="statistics-bar__img_3"></img>
-        <p className="statistics-bar__status">{insurance == 1 ? "YES" : "NO"}</p>
+        <p className="statistics-bar__status">{time}</p>
+        <img src={clock} className="statistics-bar__img_3"></img>
       </div>
       <div className="statistics-bar__transport">
-        <img src={currentTransport == 1 ? car : trolley} className="statistics-bar__img_2"></img>
+        <img
+          src={currentTransport == 1 ? car : trolley}
+          className="statistics-bar__img_2"
+        ></img>
       </div>
     </div>
   );
