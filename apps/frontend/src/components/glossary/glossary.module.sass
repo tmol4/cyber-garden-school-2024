@@ -28,13 +28,12 @@ $shade-color: star4.color(surface-container)
 
   &--entering
     animation-name: backdrop-filter-enter, backdrop-opacity-enter
-    animation-delay: 0ms
-    animation-duration: 150ms
+    animation-duration: 300ms
     animation-timing-function: linear
     animation-fill-mode: both
   &--exiting
     animation-name: backdrop-filter-enter, backdrop-opacity-enter
-    animation-duration: 200ms
+    animation-duration: 400ms
     animation-timing-function: star4.easing(emphasized-accelerate)
     animation-direction: reverse
     animation-fill-mode: both
@@ -85,28 +84,28 @@ $shade-color: star4.color(surface-container)
 
   &--entering
     animation-name: shade-enter
-    animation-duration: 600ms
+    animation-duration: 1000ms
     animation-timing-function: star4.easing(emphasized)
     animation-fill-mode: both
     overflow: visible
 
     &::before, &::after
       animation-name: corner-enter
-      animation-duration: 600ms
-      animation-timing-function: star4.easing(emphasized-accelerate)
+      animation-duration: 1000ms
+      animation-timing-function: star4.easing(emphasized)
       animation-fill-mode: both
 
   &--exiting
     animation-name: shade-enter
-    animation-duration: 200ms
-    animation-timing-function: star4.easing(emphasized)
+    animation-duration: 400ms
+    animation-timing-function: star4.easing(emphasized-accelerate)
     animation-direction: reverse
     animation-fill-mode: both
     overflow: visible
 
     &::before, &::after
       animation-name: corner-enter
-      animation-duration: 200ms
+      animation-duration: 400ms
       animation-timing-function: star4.easing(emphasized-accelerate)
       animation-direction: reverse
       animation-fill-mode: both

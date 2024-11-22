@@ -14,16 +14,20 @@ const GlossaryComponent = function Glossary(
 ) {
   const [isOpen, setIsOpen] = useState(false);
 
-  const { isMounted, isEntering, isExiting } = usePresence({
+  const { isMounted, isEntering, isExiting, isAnimating } = usePresence({
     source: isOpen,
-    transitionDuration: [600, 200],
+    transitionDuration: [1000, 400],
   });
 
   useEffect(
     () => {
-      document.body.toggleAttribute("data-scroll-lock", isMounted);
+      const isScrollLocked = isMounted && !isAnimating
+      document.body.toggleAttribute(
+        "data-scroll-lock",
+        isScrollLocked,
+      );
     },
-    [isMounted],
+    [isMounted, isAnimating],
   );
 
   return (
