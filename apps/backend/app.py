@@ -9,6 +9,8 @@ sobytie = {
 
 @app.route('/data', methods=['GET'])
 def get_data():
+    print(request.get_json())
+
     data = request.get_json().get("data")
 
     if data:
