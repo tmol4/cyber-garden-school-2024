@@ -1,8 +1,7 @@
 import uuid
-import requests
 from random import randrange
 
-from flask import Flask, request, make_response, session
+from flask import Flask, request, make_response
 from flask_cors import CORS, cross_origin
 
 from apps.backend import util

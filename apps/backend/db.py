@@ -65,6 +65,7 @@ class DB:
 # conn.commit()
 # conn.close()
 
+
 if __name__ == '__main__':
     db = DB("db.db")
 
