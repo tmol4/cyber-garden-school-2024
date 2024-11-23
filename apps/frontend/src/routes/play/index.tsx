@@ -33,7 +33,10 @@ export const Route = createFileRoute("/play/")({
     context: { queryClient, sessionQueryOptions },
   }) => void queryClient.prefetchQuery(sessionQueryOptions),
   component: () => {
-    const { queryClient, sessionQueryOptions } = useRouteContext({ from: "/play/" });
+    const sessionQueryOptions = useRouteContext({
+      from: "/play/",
+      select: ({ sessionQueryOptions }) => sessionQueryOptions,
+    });
 
     const { data, status } = useQuery(sessionQueryOptions);
 
