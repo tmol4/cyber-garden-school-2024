@@ -1,6 +1,7 @@
 import { createLazyFileRoute } from "@tanstack/react-router";
 import { SectionHello } from "~/components/section-hello";
 import { Hero } from "~/components/hero-old";
+import { LastSection } from "~/components/lastSection/lastSection";
 
 import styles from "./index.module.sass";
 
@@ -12,9 +13,7 @@ function Index() {
   return (
     <main className={styles["page"]}>
       {/* <SectionHello /> */}
-      <div className={styles["hero"]}>
-        <Hero />
-      </div>
+        <LastSection />
     </main>
   )
 }
