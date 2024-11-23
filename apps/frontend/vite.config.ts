@@ -1,4 +1,5 @@
 import { defineConfig } from "vite";
+import { resolve } from "path";
 
 // Renaming all imported plugins to follow our naming convention
 import { TanStackRouterVite as tanStackRouter } from "@tanstack/router-plugin/vite";
@@ -14,4 +15,9 @@ export default defineConfig({
     vanillaExtract(),
     react(),
   ],
+  resolve: {
+    alias: {
+      "~": resolve(__dirname, "src"),
+    },
+  },
 })

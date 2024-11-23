@@ -11,7 +11,7 @@ import { useState } from "react";
 
 import styles from "./_auth.module.sass";
 import clsx from "clsx";
-import { OutletWithPresence } from "../../components/outlet";
+import { OutletWithPresence } from "~/components/outlet";
 
 export const Route = createLazyFileRoute("/(auth)/_auth")({
   component: RouteComponent,

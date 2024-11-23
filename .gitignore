@@ -19,6 +19,7 @@ dist
 dist-ssr
 *.local
 .turbo
+.vercel
 
 # Logs
 logs
