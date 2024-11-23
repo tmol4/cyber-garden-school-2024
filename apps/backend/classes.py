@@ -1,6 +1,9 @@
 class User:
     def __init__(self, data):
-        self.id, self.money, self.chance_bad, self.text_history = data
+        self._id, self.money, self.history = data
+
+    def to_json(self):
+        return {'_id': self._id, 'money': self.money, 'history': self.history}
 
 
 class Event:
