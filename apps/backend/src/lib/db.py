@@ -19,8 +19,8 @@ class DB:
     def close_db(self):
         self.conn.close()
 
-    def create_user(self, _id, money, history=""):
-        self.cursor.execute('''INSERT INTO users (id, money, history) VALUES (?, ?, ?)''', (_id, money, history))
+    def create_user(self, _id, money, credit=0, history=""):
+        self.cursor.execute('''INSERT INTO users (id, money, credit, history) VALUES (?, ?, ?, ?)''', (_id, money, credit, history))
         self.conn.commit()
 
     def get_user(self, _id) -> User:
@@ -35,8 +35,16 @@ class DB:
         history = self.cursor.execute('''SELECT history FROM users where id = ?''', (_id,))
         return history.fetchone()[0]
 
-    def set_user_history(self, _id, history,):
+    def set_user_history(self, _id, history):
         self.cursor.execute('''UPDATE users SET history = ? WHERE id = ?''', (history, _id))
+        self.conn.commit()
+
+    def set_user_money(self, _id, money):
+        self.cursor.execute('''UPDATE users SET money = ? WHERE id = ?''', (money, _id))
+        self.conn.commit()
+
+    def set_user_credit(self, _id, credit):
+        self.cursor.execute('''UPDATE users SET credit = ? WHERE id = ?''', (credit, _id))
         self.conn.commit()
 
     def add_event_to_user_history(self, _id, event_id):

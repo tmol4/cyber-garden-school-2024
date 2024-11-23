@@ -4,6 +4,7 @@ from random import randrange
 from flask import Flask, request, make_response, Response, g
 from flask_cors import CORS, cross_origin
 
+from apps.backend.src.lib.classes import Event, User
 from lib.utils import get_latest_event_from_history
 from lib.db import DB
 from lib.events import events
@@ -21,6 +22,9 @@ def get_db() -> DB:
         db = g._database = DB("db.db")
         db.connect()
     return db
+
+def make_on_event_json_response(event: Event, user: User) -> dict:
+    return {"event": event.to_json(), "user": user.to_json()}
 
 @app.after_request
 def apply_caching(response: Response):
@@ -50,21 +54,25 @@ def get_data():
 
     db = get_db()
     user = db.get_user(user_id)
-    print(f"user: {user.to_json()}")
 
     if not data:
         event = get_random_event()
         print(f"returned event: {event.to_json()}")
 
         db.add_event_to_user_history(_id=user_id, event_id=event._id)
-        return event.to_json()
+        return make_on_event_json_response(event, user)
 
-    anwser_id = data.get('answer_id')
+    anwser_id = data.get('clickedId')
 
     event = get_latest_event_from_history(user.history)
     answer = event.answers.get(anwser_id)
 
+    db.set_user_money(_id=user_id, money=user.money + answer.delta_money - user.credit * 0.1)
+    db.set_user_credit(_id=user_id, credit=user.credit * 0.9 if user.credit * 0.1 >= 20 else 0)
+
     db.add_answer_to_user_history(_id=user_id, answer_id=answer._id)
+
+    print(f"user: {user.to_json()}")
 
     print(f"answer: {answer.to_json()}")
 
@@ -73,7 +81,7 @@ def get_data():
     print(f"returned event: {event.to_json()}")
 
     db.add_event_to_user_history(_id=user_id, event_id=event._id)
-    return event.to_json()
+    return make_on_event_json_response(event, user)
 
 
 @app.route("/create_user", methods=['POST'])

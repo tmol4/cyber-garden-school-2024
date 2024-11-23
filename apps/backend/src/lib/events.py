@@ -1,6 +1,6 @@
 from lib.classes import Event, Answer
 
-events = {
+events_good = {
     "1": Event(
         _id="1",
         description="У вас есть немного лишних денег, что Вы предпримете для улучшения своего бизнеса?",
@@ -36,7 +36,7 @@ events = {
         answers={
             "1": Answer(_id="1", text="Заказать рекламу у популярного блогера", chance_bad=0, delta_money=-5000),
             "2": Answer(_id="2", text="Принять участие в городской ярмарке", chance_bad=20)
-         }
+        }
     ),
     "5": Event(
         _id="5",
@@ -95,4 +95,8 @@ events = {
         }
     ),
 }
+events_bad = {
 
+}
+
+events = {**events_good, **events_bad}

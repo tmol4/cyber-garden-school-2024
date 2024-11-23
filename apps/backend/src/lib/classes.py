@@ -1,9 +1,9 @@
 class User:
     def __init__(self, data):
-        self._id, self.money, self.history = data
+        self._id, self.money, self.credit, self.history = data
 
     def to_json(self):
-        return {'_id': self._id, 'money': self.money, 'history': self.history}
+        return {'_id': self._id, 'money': self.money, 'credit': self.credit, 'history': self.history, 'image': 'home'}
 
 
 class Event:
@@ -23,10 +23,11 @@ class Event:
 
 
 class Answer:
-    def __init__(self, _id, text, chance_bad, delta_money=0, analytic_text=""):
+    def __init__(self, _id, text, chance_bad=0, credit=0, delta_money=0, analytic_text=""):
         self._id = _id
         self.text = text
         self.chance_bad = chance_bad
+        self.credit = credit
         self.delta_money = delta_money
         self.analytic_text = analytic_text
 
@@ -35,6 +36,7 @@ class Answer:
             "id": self._id,
             "text": self.text,
             "chance_bad": self.chance_bad,
+            "credit": self.credit,
             "delta_money": self.delta_money,
             "analytic_text": self.analytic_text
         }
