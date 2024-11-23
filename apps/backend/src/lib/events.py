@@ -1,4 +1,4 @@
-from classes import Event, Answer
+from lib.classes import Event, Answer
 
 events = {
     "1": Event(

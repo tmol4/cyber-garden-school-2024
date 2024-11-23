@@ -1,6 +1,6 @@
-from classes import Event
-from db import HISTORY_EVENT_SEP, HISTORY_ANSWER_SEP
-from events import events
+from lib.classes import Event
+from lib.db import HISTORY_EVENT_SEP, HISTORY_ANSWER_SEP
+from lib.events import events
 
 
 def get_latest_event_from_history(history: str) -> Event:
