@@ -1,13 +1,14 @@
 import sqlite3
 from classes import User
 
+HISTORY_EVENT_SEP = ";"
+HISTORY_ANSWER_SEP = ","
+
 
 class DB:
     name = None
     conn = None
     cursor = None
-    HISTORY_EVENT_SEP = ";"
-    HISTORY_ANSWER_SEP = ","
 
     def __init__(self, name):
         self.connect_db(name)
@@ -35,25 +36,27 @@ class DB:
     def set_user_history(self, _id, history,):
         self.cursor.execute('''UPDATE history SET history = ? WHERE id = ?''', (history, _id))
 
-    def add_event_to_user_history(self, _id, event):
+    def add_event_to_user_history(self, _id, event_id):
         prev_history = self.get_user_history(_id)
 
         if not prev_history:
-            new_history = event
+            new_history = event_id
         else:
-            new_history = f"{prev_history}{self.HISTORY_EVENT_SEP}{event}"
+            new_history = f"{prev_history}{HISTORY_EVENT_SEP}{event_id}"
 
         self.set_user_history(_id, new_history)
 
-    def add_answer_to_user_history(self, _id, answer):
+    def add_answer_to_user_history(self, _id, answer_id):
         prev_history = self.get_user_history(_id)
 
         if not prev_history:
-            new_history = answer
+            new_history = answer_id
         else:
-            new_history = f"{prev_history}{self.HISTORY_ANSWER_SEP}{answer}"
+            new_history = f"{prev_history}{HISTORY_ANSWER_SEP}{answer_id}"
 
         self.set_user_history(_id, new_history)
+
+
 
 
 # cursor.execute('''INSERT INTO users (money) VALUES (35000)''')

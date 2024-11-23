@@ -5,6 +5,7 @@ from random import randrange
 from flask import Flask, request, make_response, session
 from flask_cors import CORS, cross_origin
 
+from apps.backend import util
 from db import DB
 from events import events
 
@@ -28,7 +29,7 @@ def get_random_event():
 @cross_origin()
 def get_data():
     data = request.get_json()
-    print(data)
+    print(f"recieved data: {data}")
 
     user_id = request.cookies.get('user_id')
     if not user_id:
@@ -36,13 +37,33 @@ def get_data():
 
     db = DB("db.db")
     user = db.get_user(user_id)
-    print(user.to_json())
-    db.close_db()
+    print(f"user: {user.to_json()}")
 
     if not data:
-        event_json = get_random_event().to_json()
-        print(event_json)
-        return event_json
+        event = get_random_event()
+        print(f"returned event: {event.to_json()}")
+
+        db.add_event_to_user_history(_id=user_id, event_id=event._id)
+        db.close_db()
+        return event.to_json()
+
+    anwser_id = data.get('answer_id')
+
+    event = util.get_latest_event_from_history(user.history)
+    answer = event.answers.get(anwser_id)
+
+    db.add_answer_to_user_history(_id=user_id, answer_id=answer._id)
+
+    print(f"answer: {answer.to_json()}")
+
+    event = get_random_event()
+
+    print(f"returned event: {event.to_json()}")
+
+    db.add_event_to_user_history(_id=user_id, event_id=event._id)
+    db.close_db()
+
+    return event.to_json()
 
 
 @app.route("/create_user", methods=['POST'])
