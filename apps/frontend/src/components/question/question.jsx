@@ -16,7 +16,7 @@ const quets = [
 ];
 
 const QuestionComponent = function Question() {
-    const { currentState } = useContext(appContext);
+    const { currentState, setPage } = useContext(appContext);
     const [time, setTime] = useState(currentState.toTheEnd);
     const [blackWindow, setBlackWindow] = useState(0);
     const [start, setStart] = useState(0);
@@ -31,31 +31,40 @@ const QuestionComponent = function Question() {
                     i == 1
                         ? currentState.buttonText1
                         : i == 2
-                        ? currentState.buttonText2
-                        : currentState.buttonText3
+                          ? currentState.buttonText2
+                          : currentState.buttonText3
                 }
                 onClick={async () => {
+                    let iFor = i;
                     const idToSend =
-                        i == 1
+                        iFor == 1
                             ? currentState.id1
-                            : i == 2
-                            ? currentState.id2
-                            : currentState.id3;
-                    //    const response = await fetch("http://localhost:5000/event", {
-                    //     method: "POST",
-                    //     headers: {
-                    //       "Content-type": "application/json; charset=UTF-8",
-                    //     },
-                    //     body: JSON.stringify({}),
-                    //   });
-
-                    setTime(time - 1);
-                    setBlackWindow(1);
-                    setTimeout(() => {
-                        setBlackWindow(0);
-                    }, 2500);
+                            : iFor == 2
+                              ? currentState.id2
+                              : currentState.id3;
+                    const response = await fetch(
+                        "http://localhost:5000/event",
+                        {
+                            method: "POST",
+                            headers: {
+                                "Content-type":
+                                    "application/json; charset=UTF-8",
+                            },
+                            body: JSON.stringify({ clickedId: idToSend }),
+                        },
+                    );
+                    console.log(response);
+                    if (time > 1) {
+                        setTime(time - 1);
+                        setBlackWindow(1);
+                        setTimeout(() => {
+                            setBlackWindow(0);
+                        }, 2500);
+                    } else {
+                        setPage("lastPage");
+                    }
                 }}
-            />
+            />,
         );
     }
     return start == 1 ? (
