@@ -94,23 +94,6 @@ def create_user():
     return response
 
 
-# @app.route("/set_user_id", methods=['POST'])
-# @cross_origin()
-# def set_user_id():
-#     user_id = request.cookies.get('user_id')
-#     if user_id:
-#         return f"user_id already set: {user_id}"
-#
-#     user_id = str(uuid.uuid4())
-#
-#     response = make_response(f"set_cookies user_id: {user_id}")
-#
-#     # Сохранение user_id в cookie
-#     response.set_cookie('user_id', user_id, httponly=True, max_age=3600)  # Max age - 1 час
-#
-#     return response
-
-
 @app.route('/get_user_id', methods=['GET'])
 @cross_origin()
 def get_user_id():
@@ -130,7 +113,6 @@ def delete_cookie():
     response = make_response("Cookie deleted successfully")
     response.set_cookie('user_id', '', expires=0)
     return response
-
 
 
 @app.route('/session', methods=['GET', 'POST', 'DELETE'])
