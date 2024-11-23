@@ -6,7 +6,8 @@ class DB:
     name = None
     conn = None
     cursor = None
-    HISTORY_SEP = ":"
+    HISTORY_EVENT_SEP = ";"
+    HISTORY_ANSWER_SEP = ","
 
     def __init__(self, name):
         self.connect_db(name)
@@ -27,12 +28,34 @@ class DB:
         user = self.cursor.execute('''SELECT * FROM users WHERE id = ?''', (_id,))
         return User(user.fetchone())
 
-
     def get_user_history(self, _id):
-        self.cursor.execute('''SELECT history FROM users where id = ?''', (_id,))
+        history = self.cursor.execute('''SELECT history FROM users where id = ?''', (_id,))
+        return history.fetchone()
 
-    def set_user_history(self, history, _id):
+    def set_user_history(self, _id, history,):
         self.cursor.execute('''UPDATE history SET history = ? WHERE id = ?''', (history, _id))
+
+    def add_event_to_user_history(self, _id, event):
+        prev_history = self.get_user_history(_id)
+
+        if not prev_history:
+            new_history = event
+        else:
+            new_history = f"{prev_history}{self.HISTORY_EVENT_SEP}{event}"
+
+        self.set_user_history(_id, new_history)
+
+    def add_answer_to_user_history(self, _id, answer):
+        prev_history = self.get_user_history(_id)
+
+        if not prev_history:
+            new_history = answer
+        else:
+            new_history = f"{prev_history}{self.HISTORY_ANSWER_SEP}{answer}"
+
+        self.set_user_history(_id, new_history)
+
+
 # cursor.execute('''INSERT INTO users (money) VALUES (35000)''')
 
 # data = cursor.execute('''SELECT * FROM users''')
