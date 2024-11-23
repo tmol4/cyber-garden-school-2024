@@ -11,8 +11,9 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 
 
 def get_random_event():
-    randindex = randrange(0, len(events))
-    return events[randindex]
+    events_list = list(events.values())
+    randindex = randrange(0, len(events_list))
+    return events_list[randindex]
 
 
 @app.route('/event', methods=['POST'])

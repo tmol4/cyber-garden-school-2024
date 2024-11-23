@@ -14,7 +14,7 @@ class Event:
         return {
             "id": self._id,
             "description": self.description,
-            "answers": {answer._id: answer.to_json() for answer in self.answers},
+            "answers": {_id: answer.to_json() for _id, answer in self.answers.items()},
             "delta_money": self.delta_money
         }
 
