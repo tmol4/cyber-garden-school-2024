@@ -8,7 +8,7 @@ export const appContext = createContext({});
 const AppComponent = function App() {
   const [page, setPage] = useState("Hello");
   const [currentState, setCurrentState] = useState({
-    currentPage: "Hello",
+    credit: -100,
     balance: 1230,
     toTheEnd: 0,
     buttonText1: "TEST text",

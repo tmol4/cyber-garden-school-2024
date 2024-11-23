@@ -5,13 +5,21 @@ import { Statistics } from "./../statistics/statistics";
 import { Button } from "@star4/react";
 import { appContext } from "./../../app";
 import "./_question.sass";
+
 import imgForQuestion from "./../../img/home.jpeg";
+import shawarma from "./../../img/shawarma.jpg";
+
+const quets = [
+    "Судьба зависит от нашего выбора",
+    "Не расстраивайтесь, если что-то не получилось!",
+    "Всё таки нужно было остаться дома...",
+];
 
 const QuestionComponent = function Question() {
-    const { currentState, setCurrentState } = useContext(appContext);
+    const { currentState } = useContext(appContext);
     const [time, setTime] = useState(currentState.toTheEnd);
     const [blackWindow, setBlackWindow] = useState(0);
-
+    const [start, setStart] = useState(0);
     let mas = [];
     for (let i = 0; i < currentState.buttons; i++) {
         mas.push(
@@ -43,25 +51,14 @@ const QuestionComponent = function Question() {
 
                     setTime(time - 1);
                     setBlackWindow(1);
-                    setCurrentState({
-                        currentPage: "question",
-                        balance: currentState.balance,
-                        toTheEnd: time - 1,
-                        buttonText1: currentState.buttonText1,
-                        buttonText2: currentState.buttonText2,
-                        buttonText3: currentState.buttonText3,
-                        id1: currentState.id1,
-                        id2: currentState.id2,
-                        id3: currentState.id3,
-                        text: currentState.text,
-                        buttons: currentState.buttons,
-                        image: currentState.image,
-                    });
+                    setTimeout(() => {
+                        setBlackWindow(0);
+                    }, 2500);
                 }}
             />
         );
     }
-    return (
+    return start == 1 ? (
         <>
             <img
                 src={
@@ -75,7 +72,7 @@ const QuestionComponent = function Question() {
                 <Header />
                 <Statistics
                     currentMoney={currentState.balance}
-                    currentTransport={currentState.currentTransport}
+                    credit={currentState.credit}
                     time={time}
                 />
                 <div className="question-div__event">
@@ -91,16 +88,33 @@ const QuestionComponent = function Question() {
             >
                 <div className="black-window__container">
                     <h1 className="black-window__text">
-                        Наша судьба зависит от нашего выбора
+                        {quets[Math.floor(Math.random() * quets.length)]}
                     </h1>
-                    <Button
-                        className="black-window__button white"
-                        label="Далее"
-                        variant="filled"
-                    />
                 </div>
             </div>
         </>
+    ) : (
+        <div
+            className={clsx({
+                "start-div": true,
+            })}
+        >
+            <img src={shawarma} className="start-div__shawarma" />
+            <div className="start-div__section">
+                <h1 className="start-div__start-text">
+                    Вам предстоит играть за начинающего бизнесмена-шаурмиста в
+                    суровых реалях России
+                </h1>
+                <Button
+                    variant="filled"
+                    className="start-div__start-button white"
+                    label="Продолжить"
+                    onClick={() => {
+                        setStart(1);
+                    }}
+                />
+            </div>
+        </div>
     );
 };
 

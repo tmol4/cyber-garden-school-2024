@@ -2,10 +2,11 @@ import { memo } from "react";
 import "./_statistics.sass";
 import cash from "./../../img/cash.png";
 import clock from "./../../img/clock.png";
+import creditImg from './../../img/credit.png'
 
 const StatisticsComponent = function Statistics({
   currentMoney,
-  currentTransport,
+  credit,
   time,
 }) {
   return (
@@ -19,10 +20,11 @@ const StatisticsComponent = function Statistics({
         <img src={clock} className="statistics-bar__img_3"></img>
       </div>
       <div className="statistics-bar__transport">
+      <p className="statistics-bar__status">{credit}</p>
         <img
-          src={null}
+          src={creditImg}
           className="statistics-bar__img_2"
-        ></img>
+        />
       </div>
     </div>
   );

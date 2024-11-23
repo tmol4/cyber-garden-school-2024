@@ -8,31 +8,30 @@ $surface: var(--star4-color-surface)
   src: url("../fonts/Jura.ttf")
 
 .sectionHello
-  width: 100vw
-  height: 100vh
-  display: grid
-  gap: 5rem
-  grid-template-rows: 7rem minmax(34rem, object-fit) minmax(20rem, 25rem)
-  grid-template-columns: minmax(35rem, 64rem)
-  &__background
-    width: 100%
-    height: 100%
-    position: absolute
-    z-index: 1
-    object-fit: cover
-    filter: saturate(50%)
-  @include main.responde(mobile-low)
-    grid-template-rows: 6rem minmax(40rem, 50rem) minmax(5rem, 10rem)
-    grid-template-columns: minmax(27rem, 45rem)
-
-  &__button
+    width: 100vw
+    height: 100vh
     display: grid
-    grid-template-rows: 10rem
-    grid-template-columns: 2fr 3fr 2fr
-    z-index: 2
+    gap: 5rem
+    grid-template-rows: 7rem minmax(34rem, object-fit) minmax(20rem, 25rem)
+    grid-template-columns: minmax(35rem, 64rem)
+    &__background
+        width: 100%
+        height: 100%
+        position: absolute
+        z-index: 1
+        object-fit: cover
+        filter: saturate(50%)
     @include main.responde(mobile-low)
-      grid-template-columns: 2fr 2fr 2fr
-      grid-template-rows: 6rem
+        grid-template-rows: 6rem minmax(40rem, 50rem) minmax(5rem, 10rem)
+        grid-template-columns: minmax(27rem, 45rem)
+    &__button
+        display: grid
+        grid-template-rows: 10rem
+        grid-template-columns: 2fr 3fr 2fr
+        z-index: 2
+        @include main.responde(mobile-low)
+        grid-template-columns: 2fr 2fr 2fr
+        grid-template-rows: 6rem
 .position
     grid-column: 2/3
 
