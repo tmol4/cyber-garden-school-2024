@@ -13,6 +13,7 @@ export namespace Header {
       "children"
     >
     & {
+      scrolledUnder?: boolean;
       leading?: ReactNode;
       headline: ReactNode;
       trailing?: ReactNode;
@@ -25,6 +26,7 @@ const HeaderComponent = forwardRef<Header.Element, Header.Props>(
   function Header(
     {
       className,
+      scrolledUnder,
       leading,
       headline,
       trailing,
@@ -63,7 +65,7 @@ const HeaderComponent = forwardRef<Header.Element, Header.Props>(
         className={
           clsx(
             styles["header"],
-            isScrolledUnder && styles["header--scrolled-under"],
+            (scrolledUnder ?? isScrolledUnder) && styles["header--scrolled-under"],
             className,
           )
         }

@@ -1,0 +1,23 @@
+@use "~/sass/star4"
+
+.card
+  position: relative
+  border-radius: star4.shape(medium)
+  isolation: isolate
+
+  &--elevated
+    background-color: star4.color(surface-container-low)
+  &--filled
+    background-color: star4.color(surface-container-highest)
+  &--outlined
+
+  &__outline
+    position: absolute
+    inset: 0
+    border-radius: inherit
+    border-style: solid
+    border-width: 1px
+    border-color: star4.color(outline-variant)
+    z-index: 1
+    pointer-events: none
+

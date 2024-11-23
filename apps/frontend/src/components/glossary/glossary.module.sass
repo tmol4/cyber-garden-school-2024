@@ -21,36 +21,34 @@ $shade-color: star4.color(surface-container)
   position: absolute
   inset: 0
 
-  backdrop-filter: blur(8px)
-  background-color: $backdrop-color
+  backdrop-filter: blur(0px)
+  // background-color: $backdrop-color
+  background-color: transparent
 
   z-index: 1
 
-  &--entering
-    animation-name: backdrop-filter-enter, backdrop-opacity-enter
-    animation-duration: 300ms
-    animation-timing-function: linear
-    animation-fill-mode: both
+  animation-name: backdrop-filter-enter, backdrop-opacity-enter
+  animation-duration: 200ms
+  animation-timing-function: linear
+  animation-fill-mode: backwards
+
+  &--visible
+    backdrop-filter: blur(8px)
+    background-color: $backdrop-color
+
   &--exiting
-    animation-name: backdrop-filter-enter, backdrop-opacity-enter
-    animation-duration: 400ms
-    animation-timing-function: star4.easing(emphasized-accelerate)
-    animation-direction: reverse
-    animation-fill-mode: both
+    transition-property: backdrop-filter, background-color
+    transition-duration: 200ms
+    transition-timing-function: star4.easing(emphasized-accelerate)
 
 @keyframes shade-enter
   from
     bottom: 100%
     transform: translateY(calc(-1 * $corner))
-  to
-    bottom: 0
-    transform: translateY(0)
 
 @keyframes corner-enter
   from
     transform: scale(1)
-  to
-    transform: scale(0)
 
 .shade
   position: absolute
@@ -60,55 +58,53 @@ $shade-color: star4.color(surface-container)
   overflow: hidden
   z-index: 2
 
-  &::before
+  animation-name: shade-enter
+  animation-duration: 800ms
+  animation-timing-function: star4.easing(emphasized)
+  animation-fill-mode: backwards
+  overflow: visible
+
+  bottom: 100%
+  transform: translateY(calc(-1 * $corner))
+
+  &::before, &::after
     content: ""
     position: absolute
     top: 100%
-    left: 0
     width: $corner
     height: $corner
-    transform-origin: top left
     background-color: $shade-color
+    transform: scale(1)
+    animation-name: corner-enter
+    animation-duration: 800ms
+    animation-timing-function: star4.easing(emphasized)
+    animation-fill-mode: backwards
+
+  &::before
+    left: 0
+    transform-origin: top left
     mask-image: radial-gradient($corner at 100% 100%, #0000 99%, #000 101%)
 
   &::after
-    content: ""
-    position: absolute
-    top: 100%
     right: 0
-    width: $corner
-    height: $corner
     transform-origin: top right
-    background-color: $shade-color
     mask-image: radial-gradient($corner at 0% 100%, #0000 99%, #000 101%)
 
-  &--entering
-    animation-name: shade-enter
-    animation-duration: 1000ms
-    animation-timing-function: star4.easing(emphasized)
-    animation-fill-mode: both
-    overflow: visible
-
+  &--visible
+    bottom: 0
+    transform: translateY(0)
     &::before, &::after
-      animation-name: corner-enter
-      animation-duration: 1000ms
-      animation-timing-function: star4.easing(emphasized)
-      animation-fill-mode: both
+      transform: scale(0)
 
   &--exiting
-    animation-name: shade-enter
-    animation-duration: 400ms
-    animation-timing-function: star4.easing(emphasized-accelerate)
-    animation-direction: reverse
-    animation-fill-mode: both
-    overflow: visible
+    transition-property: bottom, transform
+    transition-duration: 200ms
+    transition-timing-function: star4.easing(emphasized-accelerate)
 
     &::before, &::after
-      animation-name: corner-enter
-      animation-duration: 400ms
-      animation-timing-function: star4.easing(emphasized-accelerate)
-      animation-direction: reverse
-      animation-fill-mode: both
+      transition-property: transform
+      transition-duration: 200ms
+      transition-timing-function: star4.easing(emphasized-accelerate)
 
   &__scroller
     position: absolute
@@ -116,6 +112,46 @@ $shade-color: star4.color(surface-container)
     overflow-x: hidden
     overflow-y: scroll
 
+    &--animating
+      overflow-y: hidden
+
   &__header
     &#{&}
       background-color: $shade-color
+    &--scrolled-under
+      &#{&}
+         background-color: star4.color(surface-container-highest)
+
+
+
+
+.glossary
+  &__content
+    max-width: 840px
+    min-height: 70vh
+    margin-inline: auto
+    padding-inline: 16px
+
+    @include star4.layout(compact, medium)
+      padding-inline: 16px
+    @include star4.layout(expanded, extra-large)
+      padding-inline: 24px
+
+    @include star4.typescale(body, large)
+  &__h2
+    @include star4.typescale(title, medium)
+  &__icons-card
+    padding-block: 8px
+    border-radius: star4.shape(small)
+    border: 1px solid star4.color(outline)
+  &__action
+    display: flex
+    aling-items: center
+    justify-content: center
+    padding-inline: 16px
+    padding-block: 8px
+
+    @include star4.layout(compact, medium)
+      padding-inline: 16px
+    @include star4.layout(expanded, extra-large)
+      padding-inline: 24px
