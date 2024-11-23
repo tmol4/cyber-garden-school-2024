@@ -6,6 +6,7 @@ import styles from "./glossary.module.sass";
 import { Header } from "../header";
 import { Card } from "../card";
 import { THEME } from "~/theme";
+import { Accordion } from "../accordion";
 
 export namespace Glossary {
   export type Props = {}
@@ -141,17 +142,35 @@ const GlossaryComponent = function Glossary(
                           </span>
                         } />
                     </div>
+                    <Accordion>
+                      <Accordion.Item headline="Бюджет">
+                        <p>
+                          Бюджет — это план или расчёт того, сколько денег получают и как планируют их тратить.
+                          Он помогает контролировать финансы и позволяет принимать информированные решения о том, как использовать ресурсы.
+                        </p>
+                      </Accordion.Item>
+                      <Accordion.Item headline="Финансовый план">
+                        <p>
+                          Финансовый план — это стратегия управления личными финансами,
+                          где прописаны анализ доходов и расходов,
+                          суммы накоплений, конечная цель и сроки достижения.
+                        </p>
+
+                        Личный финансовый план помогает:
+                        <ul>
+                          <li>разобраться с финансами;</li>
+                          <li>управлять расходами;</li>
+                          <li>регулярно откладывать и копить деньги;</li>
+                          <li>ставить конкретные финансовые цели.</li>
+                        </ul>
+                      </Accordion.Item>
+                    </Accordion>
                   </div>
                   <div className={styles["glossary__action"]}>
-                    <Button
+                    <ActionButton
                       onClick={() => setIsOpen(false)}
-                      variant="filled"
                       icon={<ArrowForward />}
                       label="Продолжить!" />
-                    {/* <ActionButton
-                      onClick={() => setIsOpen(false)}
-                      icon={<ArrowForward />}
-                      label="Продолжить!" /> */}
                   </div>
                 </Lenis.Content>
             </Lenis.Wrapper>

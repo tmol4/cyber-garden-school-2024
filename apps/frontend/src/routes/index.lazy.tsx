@@ -1,6 +1,6 @@
 import { createLazyFileRoute } from "@tanstack/react-router";
 import { SectionHello } from "~/components/section-hello";
-import { Hero } from "~/components/hero";
+import { Hero } from "~/components/hero-old";
 
 import styles from "./index.module.sass";
 
