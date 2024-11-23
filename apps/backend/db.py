@@ -28,6 +28,11 @@ class DB:
         return User(user.fetchone())
 
 
+    def get_user_history(self, _id):
+        self.cursor.execute('''SELECT history FROM users where id = ?''', (_id,))
+
+    def set_user_history(self, history, _id):
+        self.cursor.execute('''UPDATE history SET history = ? WHERE id = ?''', (history, _id))
 # cursor.execute('''INSERT INTO users (money) VALUES (35000)''')
 
 # data = cursor.execute('''SELECT * FROM users''')
