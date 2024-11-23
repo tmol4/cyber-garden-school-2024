@@ -4,9 +4,9 @@ from random import randrange
 from flask import Flask, request, make_response
 from flask_cors import CORS, cross_origin
 
-import util
-from db import DB
-from events import events
+from lib.utils import get_latest_event_from_history
+from lib.db import DB
+from lib.events import events
 
 app = Flask(__name__)
 
@@ -14,9 +14,6 @@ cors = CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
 
 app.secret_key = str(uuid.uuid4())
-
-dev = "http://localhost:5000"
-
 
 def get_random_event():
     events_list = list(events.values())
@@ -48,7 +45,7 @@ def get_data():
 
     anwser_id = data.get('answer_id')
 
-    event = util.get_latest_event_from_history(user.history)
+    event = get_latest_event_from_history(user.history)
     answer = event.answers.get(anwser_id)
 
     db.add_answer_to_user_history(_id=user_id, answer_id=answer._id)
@@ -121,8 +118,3 @@ def delete_cookie():
     response = make_response("Cookie deleted successfully")
     response.set_cookie('user_id', '', expires=0)
     return response
-
-
-if __name__ == '__main__':
-    app.run(debug=True, host='127.0.0.1', port=5000)
-
