@@ -2,5 +2,9 @@
   "private": true,
   "name": "@cgs/backend",
   "type": "module",
-  "packageManager": "yarn@4.5.2"
+  "packageManager": "yarn@4.5.2",
+  "scripts": {
+    "dev": "py src/dev.py",
+    "start": "py src/prod.py"
+  }
 }

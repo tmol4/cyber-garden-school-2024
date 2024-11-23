@@ -4,7 +4,7 @@ from random import randrange
 from flask import Flask, request, make_response
 from flask_cors import CORS, cross_origin
 
-from apps.backend import util
+import util
 from db import DB
 from events import events
 

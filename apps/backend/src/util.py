@@ -1,5 +1,5 @@
-from apps.backend.classes import Event
-from apps.backend.db import HISTORY_EVENT_SEP, HISTORY_ANSWER_SEP
+from classes import Event
+from db import HISTORY_EVENT_SEP, HISTORY_ANSWER_SEP
 from events import events
 
 
