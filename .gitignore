@@ -13,12 +13,15 @@
 .pnp.*
 
 node_modules/
+.venv
 package-lock.json
 
 dist
 dist-ssr
 *.local
 .turbo
+.vercel
+
 
 # Logs
 logs

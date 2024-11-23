@@ -1,4 +1,4 @@
-import { createIdentifiableElement } from "@star4/react";
+import { ActionButton, ArrowForward, createIdentifiableElement, NorthEast } from "@star4/react";
 import { memo } from "react";
 
 import styles from "./hero.module.sass";
@@ -12,7 +12,13 @@ export namespace Hero {
 const HeroComponent = function Hero() {
   return (
     <div>
+      <div>
 
+      </div>
+      <ActionButton
+        onClick={() => {}}
+        icon={<NorthEast />}
+        label="Начать" />
     </div>
   );
 }

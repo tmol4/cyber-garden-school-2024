@@ -1,9 +1,8 @@
 import { memo } from "react";
-import { Button } from "../button";
-import { BurgerMenu } from "../burger-menu";
-import { Menu } from "../menu";
+import { Button } from "~/components/button";
+import { Menu } from "~/components/menu";
 
-import img from "../../assets/images/sectionHello.png";
+import img from "~/assets/images/sectionHello.png";
 import "./_section-hello.sass";
 
 const SectionHelloComponent = function SectionHello() {
