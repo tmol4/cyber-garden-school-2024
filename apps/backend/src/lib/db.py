@@ -27,6 +27,10 @@ class DB:
         user = self.cursor.execute('''SELECT * FROM users WHERE id = ?''', (_id,))
         return User(user.fetchone())
 
+    def delete_user(self, _id):
+        self.cursor.execute('''DELETE FROM users WHERE id = ?''', (_id,))
+        self.conn.commit()
+
     def get_user_history(self, _id):
         history = self.cursor.execute('''SELECT history FROM users where id = ?''', (_id,))
         return history.fetchone()[0]

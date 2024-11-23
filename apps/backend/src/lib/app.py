@@ -110,6 +110,9 @@ def delete_cookie():
     if not user_id:
         return 'No user_id', 400
 
+    db = get_db()
+    db.delete_user(_id=user_id)
+
     response = make_response("Cookie deleted successfully")
     response.set_cookie('user_id', '', expires=0)
     return response
