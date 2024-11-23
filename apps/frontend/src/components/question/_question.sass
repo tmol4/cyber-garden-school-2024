@@ -11,12 +11,12 @@ $onSecondaryContainter: var(--star4-color-on-secondary-container)
   grid-template-rows: 10rem 6rem minmax(15rem, 20rem) minmax(18rem, 22rem)
   z-index: 2
   &__img
-    width: 100%
-    height: 100%
+    width: 102%
+    height: 102%
     position: absolute
     z-index: 1
     object-fit: cover
-    filter: saturate(50%)
+    filter: saturate(40%)
   &__buttons
     display: flex
     justify-content: space-evenly
@@ -46,3 +46,39 @@ $onSecondaryContainter: var(--star4-color-on-secondary-container)
 .white
     background-color: white
     color: black
+
+.black-window
+    background-color: rgba(black, 0.8)
+    z-index: 100
+    position: absolute
+    width: 102%
+    height: 102%
+    top: 0
+    display: flex
+    transition: all .15s ease
+    justify-content: center
+    align-items: center
+    transform: translateX(-100%)
+    &__container
+        width: 100%
+        max-width: 50rem
+        height: 50%
+        display: flex
+        flex-direction: column
+        justify-content: space-around
+        align-items: center
+        text-align: center
+    h1
+        z-index: 101
+        color: white
+        line-height: 120%
+        font-size: 2rem
+        display: inline-block
+        width: 90%
+    &__button
+        z-index: 101
+        width: 85%
+
+.black-window_active
+    transform: translateX(0)
+
