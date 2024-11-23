@@ -35,7 +35,7 @@ def get_data():
     if not user_id:
         return "No user"
 
-    db = DB("db.db")
+    db = DB()
     user = db.get_user(user_id)
     print(f"user: {user.to_json()}")
 
@@ -75,7 +75,7 @@ def create_user():
 
     user_id = str(uuid.uuid4())
 
-    db = DB("db.db")
+    db = DB()
     db.create_user(_id=user_id, money=15000)
     db.close_db()
 
