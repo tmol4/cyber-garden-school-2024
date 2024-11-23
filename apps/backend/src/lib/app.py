@@ -1,7 +1,7 @@
 import uuid
 from random import randrange
 
-from flask import Flask, request, make_response, Response
+from flask import Flask, request, make_response, Response, g
 from flask_cors import CORS, cross_origin
 
 from lib.utils import get_latest_event_from_history
@@ -15,16 +15,28 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 
 app.secret_key = str(uuid.uuid4())
 
-def get_random_event():
-    events_list = list(events.values())
-    randindex = randrange(0, len(events_list))
-    return events_list[randindex]
-
+def get_db() -> DB:
+    db = getattr(g, '_database', None)
+    if db is None:
+        db = g._database = DB("db.db")
+        db.connect()
+    return db
 
 @app.after_request
 def apply_caching(response: Response):
     response.headers['Access-Control-Allow-Credentials'] = 'true'
     return response
+
+@app.teardown_appcontext
+def close_connection(exception):
+    db = getattr(g, '_database', None)
+    if db is not None:
+        db.close_db()
+
+def get_random_event():
+    events_list = list(events.values())
+    randindex = randrange(0, len(events_list))
+    return events_list[randindex]
 
 @app.route('/event', methods=['POST'])
 @cross_origin()
@@ -36,8 +48,7 @@ def get_data():
     if not user_id:
         return "No user"
 
-    db = DB("db.db")
-    db.connect()
+    db = get_db()
     user = db.get_user(user_id)
     print(f"user: {user.to_json()}")
 
@@ -46,7 +57,6 @@ def get_data():
         print(f"returned event: {event.to_json()}")
 
         db.add_event_to_user_history(_id=user_id, event_id=event._id)
-        db.close_db()
         return event.to_json()
 
     anwser_id = data.get('answer_id')
@@ -63,7 +73,6 @@ def get_data():
     print(f"returned event: {event.to_json()}")
 
     db.add_event_to_user_history(_id=user_id, event_id=event._id)
-    db.close_db()
     return event.to_json()
 
 
@@ -74,15 +83,11 @@ def create_user():
     if user_id:
         response = make_response(f"user already created: {user_id}")
         return response
-
+    user_id = str(uuid.uuid4())
     response = make_response(f"Created user: {user_id}")
 
-    user_id = str(uuid.uuid4())
-
-    db = DB("db.db")
-    db.connect()
+    db = get_db()
     db.create_user(_id=user_id, money=15000)
-    db.close_db()
 
     # Сохранение user_id в cookie
     response.set_cookie('user_id', user_id, max_age=3600)  # Max age - 1 час
@@ -125,3 +130,34 @@ def delete_cookie():
     response = make_response("Cookie deleted successfully")
     response.set_cookie('user_id', '', expires=0)
     return response
+
+
+
+@app.route('/session', methods=['GET', 'POST', 'DELETE'])
+@cross_origin()
+def session():
+    user_id = request.cookies.get('session_id')
+    if request.method == 'GET':
+        if not user_id:
+            return 'Session not found', 404
+        return {
+            'state': 'intro'
+        }
+    if request.method == 'POST':
+        if user_id:
+            response = make_response(f'User already created: {user_id}')
+            return response
+        user_id = str(uuid.uuid4())
+        response = make_response(f'Created user: {user_id}')
+
+        db = get_db()
+        db.create_user(_id=user_id, money=15000)
+
+        response.set_cookie('session_id', user_id, max_age=60*60)
+        return response
+    if request.method == 'DELETE':
+        if not user_id:
+            return 'No user_id', 400
+        response = make_response('Cookie deleted successfully')
+        response.set_cookie('user_id', '', expires=0)
+        return response
