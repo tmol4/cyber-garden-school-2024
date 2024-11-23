@@ -4,19 +4,20 @@
 
 
 .statistics-bar
-  display: grid
-  grid-template-columns: repeat(3, minmax(8rem, 1fr))
-  grid-template-rows: fit-content
-  border: solid .1rem black
-  border-radius: 5rem
-  padding: .2rem
-  &__img_1, &__img_2, &__img_3
-    width: 3rem
-    height: 3rem
-  &__money, &__insurance, &__transport
-    font-family: Jura
-    border: #94D742 solid .1rem
-    border-radius: 10rem
-    display: flex
-    align-items: center
-    justify-content: space-evenly
+    z-index: 2
+    display: grid
+    grid-template-columns: repeat(3, minmax(8rem, max-content))
+    grid-template-rows: fit-content
+    border: solid .1rem black
+    border-radius: 5rem
+    padding: .2rem
+    background-color: white
+    font: black
+    &__img_1, &__img_2, &__img_3
+        width: 3rem
+        height: 3rem
+    &__money, &__insurance, &__transport
+        font-family: Jura
+        display: flex
+        align-items: center
+        justify-content: space-evenly

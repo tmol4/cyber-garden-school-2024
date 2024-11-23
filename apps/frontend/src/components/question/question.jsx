@@ -1,9 +1,10 @@
 import { memo, useState, useContext } from "react";
 import { Header } from "../header/header";
 import { Statistics } from "./../statistics/statistics";
-import { Button } from "./../button/button";
+import { Button } from "@star4/react";
 import { appContext } from "./../../app";
 import "./_question.sass";
+import imgForQuestion from './../../img/Home.jpeg'
 
 const QuestionComponent = function Question() {
   const { currentState, setCurrentState } = useContext(appContext);
@@ -13,8 +14,9 @@ const QuestionComponent = function Question() {
     mas.push(
       <Button
         key={i}
-        color="red"
-        text={
+        variant="filled"
+        className="white"
+        label={
           i == 1
             ? currentState.buttonText1
             : i == 2
@@ -28,21 +30,18 @@ const QuestionComponent = function Question() {
               : i == 2
               ? currentState.id2
               : currentState.id3;
-           const response = await fetch("http://localhost:5000/event", {
-            method: "POST",
-            headers: {
-              "Content-type": "application/json; charset=UTF-8",
-            },
-            body: JSON.stringify({}),
-          });
+        //    const response = await fetch("http://localhost:5000/event", {
+        //     method: "POST",
+        //     headers: {
+        //       "Content-type": "application/json; charset=UTF-8",
+        //     },
+        //     body: JSON.stringify({}),
+        //   });
 
-          console.log(response)
           setTime(time - 1);
           setCurrentState({
             currentPage: "question",
             balance: currentState.balance,
-            insurance: currentState.insurance,
-            transport: currentState.transport,
             toTheEnd: time - 1,
             buttonText1: currentState.buttonText1,
             buttonText2: currentState.buttonText2,
@@ -52,13 +51,16 @@ const QuestionComponent = function Question() {
             id3: currentState.id3,
             text: currentState.text,
             buttons: currentState.buttons,
+            image: currentState.image
           });
         }}
       />
     );
   }
   return (
-    <div className="question-div">
+    <>
+        <img src={currentState.image == "home" ? imgForQuestion : imgForQuestion} className="question-div__img" />
+        <div className="question-div">
       <Header />
       <Statistics
         currentMoney={currentState.balance}
@@ -70,6 +72,7 @@ const QuestionComponent = function Question() {
       </div>
       <div className="question-div__buttons">{mas}</div>
     </div>
+    </>
   );
 };
 

@@ -1,5 +1,5 @@
 import { memo, useContext } from "react";
-import { Button } from "../button/button.jsx";
+import { Button } from "@star4/react";
 import { Header } from "./../header/header";
 import { appContext } from "../../app";
 
@@ -20,8 +20,9 @@ const SectionHelloComponent = function SectionHello() {
       </section>
       <div className="sectionHello__button">
         <Button
-          color="green"
-          text="Начать"
+          variant="filled"
+          label="Начать"
+          className="position"
           onClick={() => {
             setCurrentState({
               currentPage: "question",

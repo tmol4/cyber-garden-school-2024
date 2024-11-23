@@ -10,8 +10,6 @@ const AppComponent = function App() {
   const [currentState, setCurrentState] = useState({
     currentPage: "Hello",
     balance: 1230,
-    insurance: 0,
-    transport: "trolley",
     toTheEnd: 0,
     buttonText1: "TEST text",
     buttonText2: "TEST text",
@@ -21,6 +19,7 @@ const AppComponent = function App() {
     id3: -3,
     text: "TEST text",
     buttons: 3,
+    image: "home",
   });
   return (
     <>
