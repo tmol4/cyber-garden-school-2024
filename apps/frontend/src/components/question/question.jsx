@@ -4,7 +4,7 @@ import { Statistics } from "./../statistics/statistics";
 import { Button } from "@star4/react";
 import { appContext } from "./../../app";
 import "./_question.sass";
-import imgForQuestion from './../../img/Home.jpeg'
+import imgForQuestion from './../../img/home.jpeg'
 
 const QuestionComponent = function Question() {
   const { currentState, setCurrentState } = useContext(appContext);

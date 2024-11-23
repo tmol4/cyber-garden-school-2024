@@ -1,8 +1,6 @@
 import { memo } from "react";
 import "./_statistics.sass";
 import cash from "./../../img/cash.png";
-import trolley from "./../../img/trolley.png";
-import car from "./../../img/car.png";
 import clock from "./../../img/clock.png";
 
 const StatisticsComponent = function Statistics({
@@ -22,7 +20,7 @@ const StatisticsComponent = function Statistics({
       </div>
       <div className="statistics-bar__transport">
         <img
-          src={currentTransport == 1 ? car : trolley}
+          src={null}
           className="statistics-bar__img_2"
         ></img>
       </div>
