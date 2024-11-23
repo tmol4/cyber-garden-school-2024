@@ -6,9 +6,9 @@ events_good = {
         description="У вас есть немного лишних денег, что Вы предпримете для улучшения своего бизнеса?",
         delta_money=0,
         answers={
-            "1": Answer(_id="1", text="Заплатить профессиональному повару, чтобы он разработал новые вариации шаурмы", chance_bad=20, delta_money=-5000),
-            "2": Answer(_id="2", text="Потратить их на скины в DOTA 2", chance_bad=80),
-            "3": Answer(_id="3", text="Начать использовать более дорогие и качественные продукты", chance_bad=0, delta_money=-7000)
+            "1": Answer(_id="1", text="Заплатить профессиональному повару, чтобы он разработал новые вариации шаурмы", chance_bad=20, delta_money=-5000, analytic_text="analytic"),
+            "2": Answer(_id="2", text="Потратить их на скины в DOTA 2", chance_bad=80, analytic_text="analytic"),
+            "3": Answer(_id="3", text="Начать использовать более дорогие и качественные продукты", chance_bad=0, delta_money=-7000, analytic_text="analytic")
         }
     ),
     "2": Event(
@@ -16,8 +16,8 @@ events_good = {
         description="Появился новый поставщик шаурмы с более низкой ценой на мясо (ходят слухи что это собачатина). Согласны ли Вы перейти на нового поставщика?",
         delta_money=0,
         answers={
-            "1": Answer(_id="1", text="Перейти на нового поставщика", chance_bad=80, delta_money=2000),
-            "2": Answer(_id="2", text="Остаться с текущим поставщиком", chance_bad=0)
+            "1": Answer(_id="1", text="Перейти на нового поставщика", chance_bad=80, delta_money=2000, analytic_text="analytic"),
+            "2": Answer(_id="2", text="Остаться с текущим поставщиком", chance_bad=0, analytic_text="analytic")
         }
     ),
     "3": Event(
@@ -25,8 +25,8 @@ events_good = {
         description="К сожалению, ваше арендное помещение нуждается в ремонте, Вам нужно решить как справиться с непредвиденными расходами:",
         delta_money=0,
         answers={
-            "1": Answer(_id="1", text="Взять кредит", chance_bad=20),
-            "2": Answer(_id="2", text="Сэкономить на зарплате работников", chance_bad=70)
+            "1": Answer(_id="1", text="Взять кредит", chance_bad=20, analytic_text="analytic"),
+            "2": Answer(_id="2", text="Сэкономить на зарплате работников", chance_bad=70, analytic_text="analytic")
          }
     ),
     "4": Event(
@@ -34,8 +34,8 @@ events_good = {
         description="О вашей шаурмечной никто не знает, ваше предприятие нужнается в рекламе: ",
         delta_money=0,
         answers={
-            "1": Answer(_id="1", text="Заказать рекламу у популярного блогера", chance_bad=0, delta_money=-5000),
-            "2": Answer(_id="2", text="Принять участие в городской ярмарке", chance_bad=20)
+            "1": Answer(_id="1", text="Заказать рекламу у популярного блогера", chance_bad=0, delta_money=-5000, analytic_text="analytic"),
+            "2": Answer(_id="2", text="Принять участие в городской ярмарке", chance_bad=20, analytic_text="analytic")
         }
     ),
     "5": Event(
@@ -43,8 +43,8 @@ events_good = {
         description="О вашей шаурмечной никто не знает, ваше предприятие нужнается в рекламе: ",
         delta_money=0,
         answers={
-            "1": Answer(_id="1", text="Заказать рекламу у популярного блогера", chance_bad=0, delta_money=-5000),
-            "2": Answer(_id="2", text="Принять участие в городской ярмарке", chance_bad=20)
+            "1": Answer(_id="1", text="Заказать рекламу у популярного блогера", chance_bad=0, delta_money=-5000, analytic_text="analytic"),
+            "2": Answer(_id="2", text="Принять участие в городской ярмарке", chance_bad=20, analytic_text="analytic")
         }
     ),
     "6": Event(
@@ -52,8 +52,8 @@ events_good = {
         description="Был разработан новый соус, все ваши конкуренты уже используют его, но у вас недостаточно денег, что Вы будете делать? ",
         delta_money=0,
         answers={
-            "1": Answer(_id="1", text="Взять микрозайм для покупки соуса", chance_bad=20, delta_money=5000),
-            "2": Answer(_id="2", text="Ничего не делать", chance_bad=70)
+            "1": Answer(_id="1", text="Взять микрозайм для покупки соуса", chance_bad=20, delta_money=5000, analytic_text="analytic"),
+            "2": Answer(_id="2", text="Ничего не делать", chance_bad=70, analytic_text="analytic")
         }
     ),
     "7": Event(
@@ -61,8 +61,8 @@ events_good = {
         description="Вы заметили, что ваш персонал слишком часто отлынивает от работы, что Вы предпримете?",
         delta_money=0,
         answers={
-            "1": Answer(_id="1", text="Платить им больше зп", chance_bad=0, delta_money=-5000),
-            "2": Answer(_id="2", text="Нанять польностью новый персонал", chance_bad=30)
+            "1": Answer(_id="1", text="Платить им больше зп", chance_bad=0, delta_money=-5000, analytic_text="analytic"),
+            "2": Answer(_id="2", text="Нанять польностью новый персонал", chance_bad=30, analytic_text="analytic")
         }
     ),
     "8": Event(
@@ -70,9 +70,9 @@ events_good = {
         description="Вы обнаружили, что у вас есть немного лишних своих денег. Что Вы с ними сделаете?",
         delta_money=0,
         answers={
-            "1": Answer(_id="1", text="Инвестируете их в акции компании Z", chance_bad=10),
-            "2": Answer(_id="2", text="Купить аркану в DOTA 2", chance_bad=80),
-            "3": Answer(_id="3", text="Положить их на сберегательный счёт",chance_bad=0)
+            "1": Answer(_id="1", text="Инвестируете их в акции компании Z", chance_bad=10, analytic_text="analytic"),
+            "2": Answer(_id="2", text="Купить аркану в DOTA 2", chance_bad=80, analytic_text="analytic"),
+            "3": Answer(_id="3", text="Положить их на сберегательный счёт", chance_bad=0, analytic_text="analytic")
         }
     ),
     "9": Event(
@@ -81,8 +81,8 @@ events_good = {
         delta_money=0,
         answers={
             "1": Answer(_id="1", text="Взять кредит", chance_bad=20),
-            "2": Answer(_id="2", text="Ограничить ненужные расходы", chance_bad=0),
-            "3": Answer(_id="3", text="Сэкономить на производстве", chance_bad=80)
+            "2": Answer(_id="2", text="Ограничить ненужные расходы", chance_bad=0, analytic_text="analytic"),
+            "3": Answer(_id="3", text="Сэкономить на производстве", chance_bad=80, analytic_text="analytic")
         }
     ),
     "10": Event(
@@ -90,8 +90,8 @@ events_good = {
         description="Открылась новая шаурмечная неподалеку, предлагающая более низкие цены. Ваши действия:",
         delta_money=0,
         answers={
-            "1": Answer(_id="1", text="Тоже понизить цену на шаурму", chance_bad=40),
-            "2": Answer(_id="2", text="Провести маркетинговую кампанию", chance_bad=0, delta_money=-5000),
+            "1": Answer(_id="1", text="Тоже понизить цену на шаурму", chance_bad=40, analytic_text="analytic"),
+            "2": Answer(_id="2", text="Провести маркетинговую кампанию", chance_bad=0, delta_money=-5000, analytic_text="analytic"),
         }
     ),
 }

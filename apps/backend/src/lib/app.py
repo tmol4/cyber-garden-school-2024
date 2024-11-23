@@ -5,7 +5,7 @@ from flask import Flask, request, make_response, Response, g
 from flask_cors import CORS, cross_origin
 
 from apps.backend.src.lib.classes import Event, User
-from lib.utils import get_latest_event_from_history
+from lib.utils import get_latest_event_from_history, make_analytic_text_from_history
 from lib.db import DB
 from lib.events import events
 
@@ -16,6 +16,7 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 
 app.secret_key = str(uuid.uuid4())
 
+
 def get_db() -> DB:
     db = getattr(g, '_database', None)
     if db is None:
@@ -23,13 +24,16 @@ def get_db() -> DB:
         db.connect()
     return db
 
+
 def make_on_event_json_response(event: Event, user: User) -> dict:
     return {"event": event.to_json(), "user": user.to_json()}
+
 
 @app.after_request
 def apply_caching(response: Response):
     response.headers['Access-Control-Allow-Credentials'] = 'true'
     return response
+
 
 @app.teardown_appcontext
 def close_connection(exception):
@@ -37,10 +41,12 @@ def close_connection(exception):
     if db is not None:
         db.close_db()
 
+
 def get_random_event():
     events_list = list(events.values())
     randindex = randrange(0, len(events_list))
     return events_list[randindex]
+
 
 @app.route('/event', methods=['POST'])
 @cross_origin()
@@ -54,6 +60,8 @@ def get_data():
 
     db = get_db()
     user = db.get_user(user_id)
+
+    print(f"user: {user.to_json()}")
 
     if not data:
         event = get_random_event()
@@ -71,8 +79,6 @@ def get_data():
     db.set_user_credit(_id=user_id, credit=user.credit * 0.9 if user.credit * 0.1 >= 20 else 0)
 
     db.add_answer_to_user_history(_id=user_id, answer_id=answer._id)
-
-    print(f"user: {user.to_json()}")
 
     print(f"answer: {answer.to_json()}")
 
@@ -154,3 +160,17 @@ def session():
         response = make_response('Cookie deleted successfully')
         response.set_cookie('user_id', '', expires=0)
         return response
+
+
+@app.route("/analytic", methods=['GET'])
+def get_analytic():
+    user_id = request.cookies.get('user_id')
+    if not user_id:
+        return "No user"
+
+    db = get_db()
+    user = db.get_user(user_id)
+
+    text = make_analytic_text_from_history(user.history)
+
+    return {"analytic": text}
