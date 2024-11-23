@@ -11,14 +11,27 @@ import "@fontsource-variable/material-symbols-outlined";
 import "./styles/theme.css";
 import "./styles/reset.sass";
 import "./styles/lenis.sass";
-
-const router = createRouter({ routeTree });
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 declare module "@tanstack/react-router" {
   interface Register {
     router: typeof router
   }
 }
+
+const queryClient = new QueryClient();
+
+const router = createRouter({
+  routeTree,
+  context: {
+    queryClient,
+  },
+  Wrap: ({ children }) => (
+    <QueryClientProvider client={queryClient}>
+      {children}
+    </QueryClientProvider>
+  ),
+});
 
 createRoot(
   document.getElementById("root")!

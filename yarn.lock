@@ -274,6 +274,8 @@ __metadata:
     "@mdx-js/rollup": "npm:^3.1.0"
     "@star4/react": "npm:^0.1.7"
     "@star4/vanilla-extract": "npm:^0.0.14"
+    "@tanstack/react-query": "npm:^5.61.0"
+    "@tanstack/react-query-devtools": "npm:^5.61.0"
     "@tanstack/react-router": "npm:^1.82.2"
     "@tanstack/router-devtools": "npm:^1.82.2"
     "@tanstack/router-plugin": "npm:^1.81.9"
@@ -289,8 +291,10 @@ __metadata:
     motion: "npm:^11.11.17"
     react: "npm:^18.3.1"
     react-dom: "npm:^18.3.1"
+    react-error-boundary: "npm:^4.1.2"
     sass-embedded: "npm:^1.81.0"
     typescript: "npm:^5.7.2"
+    uuid: "npm:^11.0.3"
     vercel: "npm:^39.1.1"
     vite: "npm:^5.4.11"
   languageName: unknown
@@ -1379,6 +1383,43 @@ __metadata:
   version: 1.81.9
   resolution: "@tanstack/history@npm:1.81.9"
   checksum: 10c0/90d01d7f1ad16613505cf9dbce59008702ece2fb460f2e1ac6c6e08dea99d87d6727ab06082c88030de24b985f79fd35d44034ec6cce44967f56af2091edb628
+  languageName: node
+  linkType: hard
+
+"@tanstack/query-core@npm:5.60.6":
+  version: 5.60.6
+  resolution: "@tanstack/query-core@npm:5.60.6"
+  checksum: 10c0/3339c637b00b38b704dfdde26bc475e6d1b46d130b2b22383e73012e791c8747ebebb8c72dd645e214691fcdbd2f09138d7f5b61e5c1fe64955850ddbbe32e11
+  languageName: node
+  linkType: hard
+
+"@tanstack/query-devtools@npm:5.59.20":
+  version: 5.59.20
+  resolution: "@tanstack/query-devtools@npm:5.59.20"
+  checksum: 10c0/e90008af9c5754bacb19b78b54bbbb60b4ef4aeae8ff46349cbf8596f50a49b7a66db5b9c5fc4e5d9eba6d1fe4991f0178c1c4eacdc3bee5b8f4b48f50997174
+  languageName: node
+  linkType: hard
+
+"@tanstack/react-query-devtools@npm:^5.61.0":
+  version: 5.61.0
+  resolution: "@tanstack/react-query-devtools@npm:5.61.0"
+  dependencies:
+    "@tanstack/query-devtools": "npm:5.59.20"
+  peerDependencies:
+    "@tanstack/react-query": ^5.61.0
+    react: ^18 || ^19
+  checksum: 10c0/be984f8d4095526dbcd249f018b16b1a69c6bdfef6dc2d2dfb80999889d397c6515fe9833cecffc9aaf5bbd81749c8ca0a03d2060b6a83833b54a88d840dc97b
+  languageName: node
+  linkType: hard
+
+"@tanstack/react-query@npm:^5.61.0":
+  version: 5.61.0
+  resolution: "@tanstack/react-query@npm:5.61.0"
+  dependencies:
+    "@tanstack/query-core": "npm:5.60.6"
+  peerDependencies:
+    react: ^18 || ^19
+  checksum: 10c0/b65477a8bda401dbde0daae002c4a42ce8581d749eaec723634cdeb378f5a8eb609f00d2010060a05db995adb8e20e50b2540a560e782878f4b6db132e13c140
   languageName: node
   linkType: hard
 
@@ -5439,6 +5480,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-error-boundary@npm:^4.1.2":
+  version: 4.1.2
+  resolution: "react-error-boundary@npm:4.1.2"
+  dependencies:
+    "@babel/runtime": "npm:^7.12.5"
+  peerDependencies:
+    react: ">=16.13.1"
+  checksum: 10c0/0737e5259bed40ce14eb0823b3c7b152171921f2179e604f48f3913490cdc594d6c22d43d7abb4ffb1512c832850228db07aa69d3b941db324953a5e393cb399
+  languageName: node
+  linkType: hard
+
 "react-refresh@npm:^0.14.2":
   version: 0.14.2
   resolution: "react-refresh@npm:0.14.2"
@@ -6743,6 +6795,15 @@ __metadata:
   bin:
     uuid: ./bin/uuid
   checksum: 10c0/847bd7b389f44d05cf5341134d52803116b616c7344f12c74040effd75280b58273ea3a2bee6ba6e5405688c5edbb0696f4adcbc89e1206dc1d8650bdaece7a6
+  languageName: node
+  linkType: hard
+
+"uuid@npm:^11.0.3":
+  version: 11.0.3
+  resolution: "uuid@npm:11.0.3"
+  bin:
+    uuid: dist/esm/bin/uuid
+  checksum: 10c0/cee762fc76d949a2ff9205770334699e0043d52bb766472593a25f150077c9deed821230251ea3d6ab3943a5ea137d2826678797f1d5f6754c7ce5ce27e9f7a6
   languageName: node
   linkType: hard
 
