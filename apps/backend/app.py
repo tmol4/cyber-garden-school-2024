@@ -1,9 +1,12 @@
-from flask import Flask, request, make_response, session, jsonify
 import uuid
-from flask_cors import CORS, cross_origin
+import requests
 from random import randrange
-from events import events
+
+from flask import Flask, request, make_response, session
+from flask_cors import CORS, cross_origin
+
 from db import DB
+from events import events
 
 app = Flask(__name__)
 
@@ -11,6 +14,8 @@ cors = CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
 
 app.secret_key = str(uuid.uuid4())
+
+dev = "http://localhost:5000"
 
 
 def get_random_event():
@@ -25,33 +30,57 @@ def get_data():
     data = request.get_json()
     print(data)
 
+    user_id = request.cookies.get('user_id')
+    if not user_id:
+        return "No user"
+
+    db = DB("db.db")
+    user = db.get_user(user_id)
+    print(user.to_json())
+    db.close_db()
+
     if not data:
         event_json = get_random_event().to_json()
         print(event_json)
         return event_json
 
 
-@app.route("/set_user_id", methods=['POST'])
+@app.route("/create_user", methods=['POST'])
 @cross_origin()
-def set_user_id():
+def create_user():
     user_id = request.cookies.get('user_id')
     if user_id:
-        return f"user_id already set: {user_id}"
+        return f"user already created: {user_id}"
 
-    if 'user_id' not in session:
-        session['user_id'] = str(uuid.uuid4())
+    user_id = str(uuid.uuid4())
 
-    response = make_response(f"set_cookies user_id: {session['user_id']}")
-
-    # Сохранение user_id в cookie
-    response.set_cookie('user_id', session['user_id'], httponly=True, max_age=3600)  # Max age - 1 час
-
-    # !!!
     db = DB("db.db")
-    db.create_user(_id=session['user_id'], money=5000)
+    db.create_user(_id=user_id, money=15000)
     db.close_db()
 
+    response = make_response(f"Created user: {user_id}")
+
+    # Сохранение user_id в cookie
+    response.set_cookie('user_id', user_id, httponly=True, max_age=3600)  # Max age - 1 час
+
     return response
+
+
+# @app.route("/set_user_id", methods=['POST'])
+# @cross_origin()
+# def set_user_id():
+#     user_id = request.cookies.get('user_id')
+#     if user_id:
+#         return f"user_id already set: {user_id}"
+#
+#     user_id = str(uuid.uuid4())
+#
+#     response = make_response(f"set_cookies user_id: {user_id}")
+#
+#     # Сохранение user_id в cookie
+#     response.set_cookie('user_id', user_id, httponly=True, max_age=3600)  # Max age - 1 час
+#
+#     return response
 
 
 @app.route('/get_user_id', methods=['GET'])
@@ -59,12 +88,6 @@ def get_user_id():
     user_id = request.cookies.get('user_id')
     if not user_id:
         return 'No user_id', 400
-
-    # !!!
-    db = DB("db.db")
-    user = db.get_user(_id=user_id)
-    print(user.to_json())
-    db.close_db()
 
     return user_id
 
@@ -81,5 +104,5 @@ def delete_cookie():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, host='127.0.0.1', port=5000)
 
