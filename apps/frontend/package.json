@@ -20,6 +20,7 @@
     "@fontsource-variable/recursive": "^5.1.0",
     "@fontsource-variable/roboto-flex": "^5.1.0",
     "@fontsource/roboto": "^5.1.0",
+    "@mdx-js/react": "^3.1.0",
     "@star4/react": "^0.1.7",
     "@star4/vanilla-extract": "^0.0.14",
     "@tanstack/react-router": "^1.82.2",
@@ -31,8 +32,10 @@
     "react-dom": "^18.3.1"
   },
   "devDependencies": {
+    "@mdx-js/rollup": "^3.1.0",
     "@tanstack/router-devtools": "^1.82.2",
     "@tanstack/router-plugin": "^1.81.9",
+    "@types/mdx": "^2.0.13",
     "@types/node": "^22.9.3",
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",

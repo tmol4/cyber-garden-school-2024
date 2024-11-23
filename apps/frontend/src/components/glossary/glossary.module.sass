@@ -145,11 +145,14 @@ $shade-color: star4.color(surface-container)
     border-radius: star4.shape(small)
     border: 1px solid star4.color(outline)
   &__action
+    position: sticky
+    bottom: 0
     display: flex
     aling-items: center
     justify-content: center
     padding-inline: 16px
-    padding-block: 8px
+    padding-block: 16px
+    background-color: star4.color(surface-container)
 
     @include star4.layout(compact, medium)
       padding-inline: 16px

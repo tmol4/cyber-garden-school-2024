@@ -8,6 +8,14 @@ import { Card } from "../card";
 import { THEME } from "~/theme";
 import { Accordion } from "../accordion";
 
+import Budget from "./budget.mdx";
+import FinancePlan from "./finance-plan.mdx";
+import Economy from "./economy.mdx";
+import IncomeExpenses from "./income-expenses.mdx";
+import Investments from "./investments.mdx";
+import Loans from "./loans.mdx";
+import Rate from "./rate.mdx";
+
 export namespace Glossary {
   export type Props = {}
 }
@@ -44,11 +52,15 @@ const GlossaryComponent = function Glossary(
   );
   return (
     <>
-      <IconButton
-        onClick={() => setIsOpen(prev => !prev)}
+      {/* <IconButton
+        onClick={() => setIsOpen(true)}
         variant="filledTonal"
-        selected={false}
-        icon={<MaterialSymbol name="help" />} />
+        icon={<MaterialSymbol name="book" />} /> */}
+      <Button
+        onClick={() => setIsOpen(true)}
+        variant="filledTonal"
+        icon={<MaterialSymbol name="book" />}
+        label="Глоссарий" />
       <Popover open={isMounted}>
         <div
           className={clsx(
@@ -89,22 +101,7 @@ const GlossaryComponent = function Glossary(
                       <IconButton icon={<MaterialSymbol name="search" />} />
                     } />
                   <div className={styles["glossary__content"]}>
-                    <Card variant="outlined"
-                      style={{
-                        padding: 16,
-                        "--star4-component-icon-size": "48px",
-                        "--star4-component-material-symbol-optical-size": "48",
-                      } as CSSProperties}>
-                      <MaterialSymbol name="payments" />
-                      <MaterialSymbol name="account_balance_wallet" />
-                      <MaterialSymbol name="medical_information" />
-                      <MaterialSymbol name="tram" />
-                    </Card>
-                    <h2 className={styles["glossary__h2"]}>Значки</h2>
-                    <p className={styles["glossary"]}>
-
-                    </p>
-                    <div className={styles["glossary__icons-card"]}>
+                    {/* <div className={styles["glossary__icons-card"]}>
                       <ListItem
                         multiline
                         leading={<MaterialSymbol name="payments" />}
@@ -141,28 +138,28 @@ const GlossaryComponent = function Glossary(
                             Выбор за тобой: низкая стоимость проезда либо комфорт
                           </span>
                         } />
-                    </div>
+                    </div> */}
                     <Accordion>
                       <Accordion.Item headline="Бюджет">
-                        <p>
-                          Бюджет — это план или расчёт того, сколько денег получают и как планируют их тратить.
-                          Он помогает контролировать финансы и позволяет принимать информированные решения о том, как использовать ресурсы.
-                        </p>
+                        <Budget />
                       </Accordion.Item>
                       <Accordion.Item headline="Финансовый план">
-                        <p>
-                          Финансовый план — это стратегия управления личными финансами,
-                          где прописаны анализ доходов и расходов,
-                          суммы накоплений, конечная цель и сроки достижения.
-                        </p>
-
-                        Личный финансовый план помогает:
-                        <ul>
-                          <li>разобраться с финансами;</li>
-                          <li>управлять расходами;</li>
-                          <li>регулярно откладывать и копить деньги;</li>
-                          <li>ставить конкретные финансовые цели.</li>
-                        </ul>
+                        <FinancePlan />
+                      </Accordion.Item>
+                      <Accordion.Item headline="Экономия средств">
+                        <Economy />
+                      </Accordion.Item>
+                      <Accordion.Item headline="Личные доходы и расходы">
+                        <IncomeExpenses />
+                      </Accordion.Item>
+                      <Accordion.Item headline="Инвестиции">
+                        <Investments />
+                      </Accordion.Item>
+                      <Accordion.Item headline="Кредиты, займы, ссуда">
+                        <Loans />
+                      </Accordion.Item>
+                      <Accordion.Item headline="Кредитная ставка, процент">
+                        <Rate />
                       </Accordion.Item>
                     </Accordion>
                   </div>
