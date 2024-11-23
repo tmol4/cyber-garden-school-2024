@@ -270,7 +270,7 @@ __metadata:
     "@fontsource-variable/recursive": "npm:^5.1.0"
     "@fontsource-variable/roboto-flex": "npm:^5.1.0"
     "@fontsource/roboto": "npm:^5.1.0"
-    "@star4/react": "npm:^0.1.6"
+    "@star4/react": "npm:^0.1.7"
     "@star4/vanilla-extract": "npm:^0.0.14"
     "@tanstack/react-router": "npm:^1.82.2"
     "@tanstack/router-devtools": "npm:^1.82.2"
@@ -1114,9 +1114,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@star4/react@npm:^0.1.6":
-  version: 0.1.6
-  resolution: "@star4/react@npm:0.1.6"
+"@star4/react@npm:^0.1.7":
+  version: 0.1.7
+  resolution: "@star4/react@npm:0.1.7"
   dependencies:
     "@floating-ui/dom": "npm:^1.6.12"
     "@floating-ui/react": "npm:^0.26.28"
@@ -1131,7 +1131,7 @@ __metadata:
     lenis: "npm:^1.1.16"
     react: "npm:^18.3.1"
     react-dom: "npm:^18.3.1"
-  checksum: 10c0/3b348d5a466cd6f6d8926eebf11fc9da079e4a0b9e30c3c4f4f0fbb2a4965b13d77a7c23b71b98ee4dbc44bf8e8e5f3ff2e5d98cf604593abfad38c20fdfdde7
+  checksum: 10c0/eb22fd7b25ed10e97d3e1052e6577106d971f9c2e0b9b8fd4d8304a4bec0d519da6494777a93c80d7b96288784837b2e133d5011018ff00518b3fe38765704b8
   languageName: node
   linkType: hard
 
