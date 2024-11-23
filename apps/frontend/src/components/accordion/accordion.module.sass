@@ -1,0 +1,98 @@
+@use "~/sass/star4"
+
+.accordion
+  display: flex
+  flex-direction: column
+  align-items: stretch
+  justify-content: center
+  gap: 4px
+
+  &__item
+    position: relative
+
+    border-radius: star4.shape(extra-small)
+    background-color: star4.color(secondary-container)
+    // background-color: star4.color(surface-container-highest)
+
+    overflow: hidden
+
+    transition-property: border-radius
+    transition-duration: star4.duration(long2)
+    transition-timing-function: star4.easing(emphasized)
+
+    &__header
+      outline: none
+      border: none
+      // background-color: star4.color(surface-container-highest)
+      cursor: pointer
+
+      position: relative
+      display: flex
+      align-items: center
+      justify-content: space-between
+      padding-inline: 24px
+      padding-block: 16px
+      transition-property: padding-block
+      transition-duration: star4.duration(long2)
+      transition-timing-function: star4.easing(emphasized)
+
+      color: star4.color(on-secondary-container)
+      --star4-component-ripple-hover-color: #{star4.color(on-secondary-container)}
+      --star4-component-ripple-pressed-color: #{star4.color(on-secondary-container)}
+    &__headline
+      @include star4.typescale(title, medium)
+      font-family: var(--star4-typeface-brand)
+      transition-property: font-family, font-size, font-weight, line-height, letter-spacing
+      transition-duration: star4.duration(long2)
+      transition-timing-function: star4.easing(emphasized)
+
+    &__icon
+      position: relative
+      display: flex
+      align-items: center
+      justify-content: center
+
+      transform-origin: center
+
+      transition-property: transform
+      transition-duration: star4.duration(long2)
+      transition-timing-function: star4.easing(emphasized)
+
+    &__content-wrapper
+      position: relative
+      display: grid
+      grid-template-rows: 0fr
+      overflow: hidden
+      opacity: 0
+
+      transition-property: grid-template-rows, opacity
+      transition-duration: star4.duration(long2)
+      transition-timing-function: star4.easing(emphasized)
+    &__content
+      min-height: 0
+      @include star4.typescale(body, large)
+      color: star4.color(on-surface-variant)
+    &__padding
+      padding-block: 16px
+      padding-inline: 24px
+    &--first
+      border-top-left-radius: star4.shape(medium)
+      border-top-right-radius: star4.shape(medium)
+    &--last
+      border-bottom-left-radius: star4.shape(medium)
+      border-bottom-right-radius: star4.shape(medium)
+    &--expanded
+      border-radius: star4.shape(extra-large)
+      background-color: star4.color(surface-container-highest)
+      & .accordion__item__header
+        padding-block: 24px
+        color: star4.color(on-surface)
+        --star4-component-ripple-hover-color: #{star4.color(on-surface)}
+        --star4-component-ripple-pressed-color: #{star4.color(on-surface)}
+      & .accordion__item__headline
+        @include star4.typescale(title, large)
+      & .accordion__item__icon
+        transform: rotate(180deg)
+      & .accordion__item__content-wrapper
+        grid-template-rows: 1fr
+        opacity: 1

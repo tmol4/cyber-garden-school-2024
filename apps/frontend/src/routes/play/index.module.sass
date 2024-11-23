@@ -1,0 +1,19 @@
+@use "~/sass/star4"
+
+.loading-indicator
+  background-color: star4.color(surface-container-highest)
+  border-radius: star4.shape(medium)
+  padding: 16px
+  width: fit-content
+  height: fit-content
+  margin-inline: auto
+
+  display: flex
+  flex-direction: column
+  align-items: center
+  justify-content: center
+  gap: 8px
+
+  &__label
+    @include star4.typescale(label, large)
+    color: star4.color(on-surface-variant)

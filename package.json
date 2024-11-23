@@ -12,7 +12,10 @@
     ":backend": "yarn : @cgs/backend",
     "frontend:dev": "turbo dev --filter=@cgs/frontend...",
     "frontend:build": "turbo build --filter=@cgs/frontend",
-    "frontend:preview": "turbo preview --filter=@cgs/frontend"
+    "frontend:preview": "turbo preview --filter=@cgs/frontend",
+    "backend:dev": "turbo dev --filter=@cgs/backend...",
+    "dev": "turbo dev",
+    "backend:start": "yarn : @cgs/backend start"
   },
   "devDependencies": {
     "turbo": "^2.3.1"

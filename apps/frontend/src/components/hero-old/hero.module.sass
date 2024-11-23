@@ -1,0 +1,67 @@
+@use "~/sass/star4"
+
+.hero
+  width: 100%
+
+  display: grid
+  grid-template-columns: 1fr
+  grid-template-rows: auto auto
+
+  place-content: center
+  place-items: center
+
+  @include star4.layout(compact, medium)
+    grid-template-columns: 1fr
+    grid-template-rows: auto auto
+    gap: 16px
+  @include star4.layout(expanded, extra-large)
+    grid-template-columns: 1fr 1fr
+    grid-template-rows: auto
+    gap: 24px
+
+  &__content
+    display: flex
+    flex-direction: column
+    justify-content: center
+    gap: 16px
+
+    @include star4.layout(compact, medium)
+      grid-column: 1
+      grid-row: 1
+      align-items: center
+    @include star4.layout(expanded, extra-large)
+      grid-column: 1
+      grid-row: 1
+      align-items: start
+
+  &__header
+    display: block
+
+    text-align: center
+    @include star4.layout(compact, medium)
+      text-align: center
+    @include star4.layout(expanded, extra-large)
+      text-align: left
+
+  &__headline
+    @include star4.typescale(headline, large)
+    color: star4.color(on-surface)
+    margin-bottom: 8px
+    text-wrap: balance
+
+  &__supporting-text
+    @include star4.typescale(body, large)
+    color: star4.color(on-surface-variant)
+    text-wrap: pretty
+
+  &__image
+    display: flex
+    align-items: center
+    justify-content: center
+
+    @include star4.layout(compact, medium)
+      grid-row: 2
+      grid-column: 1
+    @include star4.layout(expanded, extra-large)
+      grid-row: 1
+      grid-column: 2

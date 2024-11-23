@@ -14,7 +14,6 @@ body
   min-height: 100vh
   min-height: 100dvh
 
-  color-scheme: light dark
   background-color: star4.color(surface)
 
   -webkit-font-smoothing: antialiased
@@ -38,3 +37,6 @@ img, picture, video, canvas, svg
 // https://www.joshwcomeau.com/css/custom-css-reset/
 #root // TODO: add something like #__next
   isolation: isolate
+
+body[data-scroll-lock]
+  overflow: hidden
