@@ -2,6 +2,7 @@ from lib.db import DB
 
 if __name__ == '__main__':
     db = DB("db.db")
+    db.connect()
 
     db.cursor.execute('''CREATE TABLE users
                     (id TEXT, money INTEGER, history TEXT)''')

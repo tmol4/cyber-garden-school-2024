@@ -9,17 +9,33 @@ import { API_ENDPOINT } from "~/utils";
 const wait = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 
 const createSession = async () => {
-  const url = new URL("/session/new", API_ENDPOINT);
-  // await fetch(
+  const url = new URL("/event", API_ENDPOINT);
+  const response = await fetch(
+    url,
+    {
+      method: "POST",
+      credentials: "include",
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({}),
+    },
+  ).then(response => response.json());
+  return response;
+  // const url = new URL("/create_user", API_ENDPOINT);
+  // const response = await fetch(
   //   url,
   //   {
-  //     method: "GET",
+  //     method: "POST",
+  //     credentials: "include",
   //   },
   // );
-  await wait(2500);
-  return {
-    state: "intro",
-  };
+  // return {
+  //   ok: response.ok,
+  //   status: response.status,
+  //   statusText: response.statusText,
+  // };
 }
 
 export const Route = createFileRoute("/play/")({
