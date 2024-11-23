@@ -9,10 +9,7 @@ const LastSectionComponent = function LastSection() {
       return await fetch("http://localhost:5000/event");
     }
     setData(
-      [
-        `Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorum, inventore adipisci totam modi, pariatur nisi consequatur cumque, quo nagendi quidem dicta suscipit voluptatibus.`,
-        `Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorum, inventore adipisci totam modi, pariatur nisi consequatur cumque, quo nam temporequidem dicta suscipit voluptatibus.`,
-      ].map((text) => {
+      fetchData().map((text) => {
         return (
           <div className="last-section__container">
             <p className="last-section__p">{text}</p>
