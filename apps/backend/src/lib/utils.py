@@ -75,7 +75,8 @@ def make_on_event_json_response(db, user_id: str) -> dict:
     
     if get_history_length(user) >= 10:
         _type = "end"
-        return {"type": _type, "data": {"result": "win"}}
+        analytic = make_analytic_text_from_history(user.history)
+        return {"type": _type, "data": {"result": "win", "analytic": analytic}}
     
     event = get_random_event(user.history)
     
