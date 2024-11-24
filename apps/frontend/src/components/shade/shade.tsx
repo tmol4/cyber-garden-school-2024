@@ -13,8 +13,7 @@ export namespace Shade {
       "children"
     >
     & {
-      onEnter?: (animating: boolean) => void;
-      onExit?: (animating: boolean) => void;
+      onAnimate?: (entering: boolean, exiting: boolean) => void;
       onMount?: () => void;
       onUnmount?: () => void;
       open?: boolean;
@@ -28,8 +27,7 @@ const ShadeComponent = forwardRef<Shade.Element, Shade.Props>(
     {
       className,
       open = false,
-      onEnter,
-      onExit,
+      onAnimate,
       onMount,
       onUnmount,
       children,
@@ -66,31 +64,9 @@ const ShadeComponent = forwardRef<Shade.Element, Shade.Props>(
       },
       [isMounted],
     );
-    useEffect(
-      () => {
-        if(isEntering && !isExiting) {
-          onEnter?.(true);
-          onExit?.(false);
-        } else if(!isEntering && isExiting) {
-          onEnter?.(false);
-          onExit?.(true);
-        } else {
-          onEnter?.(false);
-          onExit?.(false);
-        }
-      },
-      [isEntering, isExiting],
-    );
-
-    const [isScrolledUnder, setIsScrolledUnder] = useState(false);
-    const onScroll: UIEventHandler<HTMLElement> = useCallback(
-      (event) => {
-        const scrollY = event.currentTarget.scrollTop;
-        const newIsScrolledUnder = scrollY > 0;
-        setIsScrolledUnder(newIsScrolledUnder);
-      },
-      [],
-    );
+    useEffect(() => {
+        onAnimate?.(isEntering, isExiting);
+    }, [isEntering, isExiting]);
 
     return (
       <Popover
