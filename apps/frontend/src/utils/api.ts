@@ -11,10 +11,15 @@ export type APIEventSession = {
 }
 
 export type APIEndingSession = {
-  type: "ending";
-  data: {
-
-  };
+  type: "end";
+  data:
+    | {
+      result: "win";
+    }
+    | {
+      result: "end";
+      analytic: string[],
+    };
 }
 
 export type APIEvent = {
