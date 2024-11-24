@@ -4,7 +4,7 @@ from random import randrange
 from flask import Flask, request, make_response, Response, g
 from flask_cors import CORS, cross_origin
 
-from apps.backend.src.lib.classes import Event, User
+from lib.classes import Event, User
 from lib.utils import get_latest_event_from_history, make_analytic_text_from_history
 from lib.db import DB
 from lib.events import events
