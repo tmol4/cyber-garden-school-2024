@@ -1,26 +1,174 @@
 @use "~/sass/star4"
 
-.page
-  max-width: 840px
+.wrapper
+  position: absolute
+  inset: 0
 
-  height: 200vh // TODO: remove
+  display: grid
+  place-items: stretch
+  place-content: stretch
 
-  margin-inline: auto
+  transition-property: padding, inset
+  transition-duration: star4.duration(long2)
+  transition-timing-function: star4.easing(emphasized)
 
-  @include star4.layout(compact, medium)
-    padding-inline: 16px
-  @include star4.layout(expanded, extra-large)
-    padding-inline: 24px
 
+  @include star4.layout(compact,compact)
+    padding: 0px
+  @include star4.layout(medium, medium)
+    top: 64px
+    padding: 16px
+  @include star4.layout(expanded, expanded)
+    top: 64px
+    padding: 24px
+  @include star4.layout(large, extra-large)
+    top: 64px
+    padding: 56px
 .hero
-  display: flex
-  flex-direction: column
-  align-items: stretch
+  position: relative
+  isolation: isolate
+  overflow: hidden
 
+  transition-property: border-radius
+  transition-duration: star4.duration(long2)
+  transition-timing-function: star4.easing(emphasized)
+
+  @include star4.layout(compact,compact)
+    border-radius: 0px
+  @include star4.layout(medium, medium)
+    border-radius: 28px
+  @include star4.layout(expanded, extra-large)
+    border-radius: 28px
+
+  &__image
+    position: absolute
+    width: 100%
+    height: 100%
+    object-fit: cover
+  &__content
+    position: relative
+    height: 100%
+    z-index: 2
+    display: flex
+    flex-direction: column
+    align-items: center
+    justify-content: center
+    gap: 16px
+    padding-inline: 16px
+  &__header
+    text-align: center
+  &__headline
+    border-radius: star4.shape(full)
+    background-color: star4.color(surface)
+    background-color: color-mix(in srgb-linear, transparent, star4.color(surface) 65%)
+    @include star4.typescale(display, large)
+    color: star4.color(on-surface)
+    margin-bottom: 8px
+    backdrop-filter: blur(8px)
+
+    transition-property: padding, font-family, font-weight, font-size, line-height, letter-spacing
+    transition-duration: star4.duration(long2)
+    transition-timing-function: star4.easing(emphasized)
+
+    @include star4.layout(compact, compact)
+      @include star4.typescale(display, small)
+      padding-inline: 16px
+      padding-block: 4px
+    @include star4.layout(medium, medium)
+      @include star4.typescale(display, medium)
+      padding-inline: 24px
+      padding-block: 8px
+    @include star4.layout(expanded, extra-large)
+      @include star4.typescale(display, large)
+      padding-inline: 48px
+      padding-block: 16px
+
+  &__supporting-text
+    padding-inline: 16px
+    padding-block: 8px
+    border-radius: star4.shape(full)
+    background-color: star4.color(surface-container-highest)
+    background-color: color-mix(in srgb-linear, transparent, star4.color(surface-container-highest) 60%)
+    @include star4.typescale(body, large)
+    color: star4.color(on-surface-variant)
+    backdrop-filter: blur(8px)
+
+
+
+
+
+.hero-button
+  position: relative
+  // width: 112px
+  // height: 112px
+
+  display: grid
+  grid-template-columns: auto 1fr
+  grid-template-rows: 40px
+  overflow: hidden
+
+  display: grid
+  place-items: center
+  place-content: center
+  gap: 8px
+
+  border-radius: star4.shape(full)
+  background-color: star4.color(primary)
+  color: star4.color(on-primary)
+
+  text-decoration: none
+
+  --star4-component-ripple-hover-color: #{star4.color(on-primary)}
+  --star4-component-ripple-pressed-color: #{star4.color(on-primary)}
+
+  transition-property: grid-template-rows, grid-template-columns, gap, padding
+  transition-duration: star4.duration(long2)
+  transition-timing-function: star4.easing(emphasized)
 
   @include star4.layout(compact, medium)
-    justify-content: flex-start
-    padding-block: 56px
-  @include star4.layout(expanded, extra-large)
-    min-height: 70vh
-    justify-content: center
+    grid-template-columns: 24px 1fr
+    grid-template-rows: 40px
+    gap: 8px
+    padding-inline: 16px 24px
+  @include star4.layout(expanded, expanded)
+    grid-template-columns: 36px 1fr
+    grid-template-rows: 56px
+    gap: 8px
+    padding-inline: 16px
+  @include star4.layout(large, extra-large)
+    grid-template-columns: 112px 0fr
+    grid-template-rows: 112px
+    gap: 0px
+    padding-inline: 0px
+
+  &__icon
+    transition-property: width, height, font-size
+    transition-duration: star4.duration(long2)
+    transition-timing-function: star4.easing(emphasized)
+
+    @include star4.layout(compact, medium)
+      width: 24px
+      height: 24px
+      font-size: 24px
+    @include star4.layout(expanded, expanded)
+      width: 36px
+      height: 36px
+      font-size: 36px
+    @include star4.layout(large, extra-large)
+      width: 48px
+      height: 48px
+      font-size: 48px
+  &__label
+    width: 100%
+    transition-property: width, font-family, font-size, font-weight, line-height, letter-spacing
+    transition-duration: star4.duration(long2)
+    transition-timing-function: star4.easing(emphasized)
+
+    @include star4.layout(compact, medium)
+      @include star4.typescale(label, large)
+    @include star4.layout(expanded, extra-large)
+      @include star4.typescale(title, medium)
+    @include star4.layout(large, extra-large)
+      width: 0%
+    // @include star4.layout(large, extra-large)
+    //   @include star4.typescale(label, large)

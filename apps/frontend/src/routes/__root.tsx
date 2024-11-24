@@ -7,6 +7,8 @@ import { MDXProvider } from "@mdx-js/react";
 import { AppContextProvider } from "~/components/context";
 import type { QueryClient } from "@tanstack/react-query";
 
+import styles from "./__root.module.sass";
+
 const TanStackRouterDevtools =
   import.meta.env.DEV
     ? lazy(() => import("@tanstack/router-devtools")
@@ -38,17 +40,19 @@ export const Route = createRootRouteWithContext<RootRouteContext>()({
       }}>
         <Lenis>
           <AppContextProvider>
-            <Header
-              headline="Budget helper"
-              trailing={
-                <>
-                  {/* <IconButton
-                    variant="filledTonal"
-                    icon={<MaterialSymbol name="help" />} /> */}
-                  <Glossary />
-                </>
-              } />
-            <Outlet />
+            {/* <div className={styles["wrapper"]}> */}
+              <Header
+                headline="Путь шаурмиста"
+                trailing={
+                  <>
+                    {/* <IconButton
+                      variant="filledTonal"
+                      icon={<MaterialSymbol name="help" />} /> */}
+                    <Glossary />
+                  </>
+                } />
+              <Outlet />
+            {/* </div> */}
             <Suspense>
               <ReactQueryDevtools />
               <TanStackRouterDevtools />

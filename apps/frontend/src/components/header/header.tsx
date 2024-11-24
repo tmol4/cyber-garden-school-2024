@@ -17,6 +17,7 @@ export namespace Header {
       leading?: ReactNode;
       headline: ReactNode;
       trailing?: ReactNode;
+      transparent?: boolean;
     };
 
   export interface Element extends HTMLElement {}
@@ -30,6 +31,7 @@ const HeaderComponent = forwardRef<Header.Element, Header.Props>(
       leading,
       headline,
       trailing,
+      transparent,
       ...rest
     },
     forwardedRef

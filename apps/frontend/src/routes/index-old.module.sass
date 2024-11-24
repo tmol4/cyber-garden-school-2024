@@ -1,0 +1,26 @@
+@use "~/sass/star4"
+
+.page
+  max-width: 840px
+
+  height: 200vh // TODO: remove
+
+  margin-inline: auto
+
+  @include star4.layout(compact, medium)
+    padding-inline: 16px
+  @include star4.layout(expanded, extra-large)
+    padding-inline: 24px
+
+.hero
+  display: flex
+  flex-direction: column
+  align-items: stretch
+
+
+  @include star4.layout(compact, medium)
+    justify-content: flex-start
+    padding-block: 56px
+  @include star4.layout(expanded, extra-large)
+    min-height: 70vh
+    justify-content: center
