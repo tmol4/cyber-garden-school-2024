@@ -1,11 +1,10 @@
 import uuid
-from random import randrange
 
-from flask import Flask, request, make_response, Response, g
+from flask import Flask, request, make_response, Response, g, jsonify
 from flask_cors import CORS, cross_origin
 
-from apps.backend.src.lib.classes import Event, User
-from lib.utils import get_latest_event_from_history, make_analytic_text_from_history
+from lib.classes import Event, User
+from lib.utils import get_latest_event_from_history, return_last_data, make_analytic_text_from_history, make_on_event_json_response
 from lib.db import DB
 from lib.events import events
 
@@ -23,10 +22,7 @@ def get_db() -> DB:
         db = g._database = DB("db.db")
         db.connect()
     return db
-
-
-def make_on_event_json_response(event: Event, user: User) -> dict:
-    return {"event": event.to_json(), "user": user.to_json()}
+    
 
 
 @app.after_request
@@ -40,12 +36,6 @@ def close_connection(exception):
     db = getattr(g, '_database', None)
     if db is not None:
         db.close_db()
-
-
-def get_random_event():
-    events_list = list(events.values())
-    randindex = randrange(0, len(events_list))
-    return events_list[randindex]
 
 
 @app.route('/event', methods=['POST'])
@@ -64,11 +54,7 @@ def get_data():
     print(f"user: {user.to_json()}")
 
     if not data:
-        event = get_random_event()
-        print(f"returned event: {event.to_json()}")
-
-        db.add_event_to_user_history(_id=user_id, event_id=event._id)
-        return make_on_event_json_response(event, user)
+        return make_on_event_json_response(db, user)
 
     anwser_id = data.get('clickedId')
 
@@ -81,27 +67,24 @@ def get_data():
     db.add_answer_to_user_history(_id=user_id, answer_id=answer._id)
 
     print(f"answer: {answer.to_json()}")
-
-    event = get_random_event()
-
-    print(f"returned event: {event.to_json()}")
-
-    db.add_event_to_user_history(_id=user_id, event_id=event._id)
-    return make_on_event_json_response(event, user)
-
+    
+    return make_on_event_json_response(db, user)
+    
 
 @app.route("/create_user", methods=['POST'])
 @cross_origin()
 def create_user():
     user_id = request.cookies.get('user_id')
-    if user_id:
-        response = make_response(f"user already created: {user_id}")
-        return response
-    user_id = str(uuid.uuid4())
-    response = make_response(f"Created user: {user_id}")
-
     db = get_db()
-    db.create_user(_id=user_id, money=15000)
+    
+    if not user_id:
+        user_id = str(uuid.uuid4())
+        db.create_user(_id=user_id, money=25000)
+    
+    user = db.get_user(user_id)
+    
+    data = return_last_data(user)
+    response = make_response(jsonify(data))
 
     # Сохранение user_id в cookie
     response.set_cookie('user_id', user_id, max_age=3600)  # Max age - 1 час
