@@ -115,22 +115,31 @@ $shade-color: star4.color(surface-container)
     &--animating
       overflow-y: hidden
 
-  &__header
-    &#{&}
-      background-color: $shade-color
-    &--scrolled-under
-      &#{&}
-         background-color: star4.color(surface-container-highest)
+  // &__header
+  //   &#{&}
+  //     background-color: $shade-color
+  //   &--scrolled-under
+  //     &#{&}
+  //        background-color: star4.color(surface)
 
 
 
 
 .glossary
+  &__wrapper
+    display: flex
+    flex-direction: column
+    align-items: stretch
+    justify-content: center
+    height: 100%
+    min-height: 100vh
+    min-height: 100dvh
   &__content
     max-width: 840px
-    min-height: 70vh
     margin-inline: auto
+    flex-grow: 1
     padding-inline: 16px
+    padding-block: 16px
 
     @include star4.layout(compact, medium)
       padding-inline: 16px
@@ -149,12 +158,19 @@ $shade-color: star4.color(surface-container)
     bottom: 0
     display: flex
     aling-items: center
-    justify-content: center
+    justify-content: flex-end
     padding-inline: 16px
     padding-block: 16px
-    background-color: star4.color(surface-container)
+    background-color: star4.color(surface)
 
     @include star4.layout(compact, medium)
       padding-inline: 16px
     @include star4.layout(expanded, extra-large)
       padding-inline: 24px
+
+    transition-property: background-color
+    transition-duration: star4.duration(short4)
+    transition-timing-function: linear
+
+    &--scrolled-under
+      background-color: star4.color(surface-container)

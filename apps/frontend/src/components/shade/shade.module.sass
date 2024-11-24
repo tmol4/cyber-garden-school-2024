@@ -1,0 +1,110 @@
+@use "~/sass/star4"
+
+$corner: 72
+
+$backdrop-color: star4.color(surface-container-highest)
+$container-color: star4.color(surface)
+
+@keyframes shade__backdrop-enter
+  from
+    backdrop-filter: blur(0px)
+    background-color: transparent
+
+.shade
+  &::backdrop
+    display: none
+  &__backdrop
+    position: absolute
+    inset: 0
+
+    animation-name: shade__backdrop-enter
+    animation-duration: 100ms
+    animation-timing-function: linear
+    animation-fill-mode: backwards
+  &--visible .shade__backdrop
+    backdrop-filter: blur(8px)
+    background-color: $backdrop-color
+  &--exiting .shade__backdrop
+    transition-property: backdrop-filter, background-color
+    transition-duration: 400ms
+    transition-timing-function: star4.easing(emphasized-accelerate)
+
+  @keyframes shade__container-enter
+    from
+      bottom: 100%
+      transform: translateY(calc(-1px * $corner))
+
+  @keyframes shade__container__corner-enter
+    from
+      transform: scale(1)
+
+
+  &__container
+    position: absolute
+    top: 0
+    right: 0
+    left: 0
+    bottom: 100%
+    overflow: hidden
+
+    background-color: $container-color
+
+    animation-name: shade__container-enter
+    animation-duration: 800ms
+    animation-timing-function: star4.easing(emphasized)
+    animation-fill-mode: backwards
+    overflow: visible
+
+    transform: translateY(calc(-1px * $corner))
+
+    &::before, &::after
+      content: ""
+      position: absolute
+      top: 100%
+      width: #{$corner}px
+      height: #{$corner}px
+      background-color: $container-color
+      transform: scale(1)
+      animation-name: shade__container__corner-enter
+      animation-duration: 800ms
+      animation-timing-function: star4.easing(emphasized)
+      animation-fill-mode: backwards
+
+    &::before
+      left: 0
+      transform-origin: top left
+      // mask-image: radial-gradient(#{$corner}px at 100% 100%, #0000 99%, #000 101%)
+      clip-path: path("M 0 0 L #{$corner} 0 A #{$corner} #{$corner} 0 0 0 0 #{$corner}")
+
+    &::after
+      right: 0
+      transform-origin: top right
+      // mask-image: radial-gradient(#{$corner}px at 0% 100%, #0000 99%, #000 101%)
+      clip-path: path("M #{$corner} 0 L 0 0 A #{$corner} #{$corner} 0 0 1 #{$corner} #{$corner}")
+  &--visible .shade__container
+    bottom: 0
+    transform: translateY(0)
+
+    &::before, &::after
+      transform: scale(0)
+
+  &--exiting .shade__container
+    transition-property: bottom, transform
+    transition-duration: 400ms
+    transition-timing-function: star4.easing(emphasized-accelerate)
+
+    &::before, &::after
+      transition-property: transform
+      transition-duration: 400ms
+      transition-timing-function: star4.easing(emphasized-accelerate)
+
+  &__scroller
+
+  &__scroller
+    position: absolute
+    inset: 0
+    overflow-x: hidden
+    overflow-y: scroll
+
+    &--scroll-locked
+      overflow-y: hidden

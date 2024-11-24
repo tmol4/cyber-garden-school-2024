@@ -18,9 +18,6 @@ import { Route as PlayIndexImport } from "./routes/play/index";
 // Create Virtual Routes
 
 const IndexLazyImport = createFileRoute("/")();
-const authAuthLazyImport = createFileRoute("/(auth)/_auth")();
-const authAuthRegisterLazyImport = createFileRoute("/(auth)/_auth/register")();
-const authAuthLoginLazyImport = createFileRoute("/(auth)/_auth/login")();
 
 // Create/Update Routes
 
@@ -36,31 +33,6 @@ const PlayIndexRoute = PlayIndexImport.update({
   getParentRoute: () => rootRoute,
 } as any);
 
-const authAuthLazyRoute = authAuthLazyImport
-  .update({
-    id: "/(auth)/_auth",
-    getParentRoute: () => rootRoute,
-  } as any)
-  .lazy(() => import("./routes/(auth)/_auth.lazy").then((d) => d.Route));
-
-const authAuthRegisterLazyRoute = authAuthRegisterLazyImport
-  .update({
-    id: "/register",
-    path: "/register",
-    getParentRoute: () => authAuthLazyRoute,
-  } as any)
-  .lazy(() =>
-    import("./routes/(auth)/_auth.register.lazy").then((d) => d.Route),
-  );
-
-const authAuthLoginLazyRoute = authAuthLoginLazyImport
-  .update({
-    id: "/login",
-    path: "/login",
-    getParentRoute: () => authAuthLazyRoute,
-  } as any)
-  .lazy(() => import("./routes/(auth)/_auth.login.lazy").then((d) => d.Route));
-
 // Populate the FileRoutesByPath interface
 
 declare module "@tanstack/react-router" {
@@ -72,13 +44,6 @@ declare module "@tanstack/react-router" {
       preLoaderRoute: typeof IndexLazyImport;
       parentRoute: typeof rootRoute;
     };
-    "/(auth)/_auth": {
-      id: "/(auth)/_auth";
-      path: "/";
-      fullPath: "/";
-      preLoaderRoute: typeof authAuthLazyImport;
-      parentRoute: typeof undefinedRoute;
-    };
     "/play/": {
       id: "/play/";
       path: "/play";
@@ -86,86 +51,43 @@ declare module "@tanstack/react-router" {
       preLoaderRoute: typeof PlayIndexImport;
       parentRoute: typeof rootRoute;
     };
-    "/(auth)/_auth/login": {
-      id: "/(auth)/_auth/login";
-      path: "/login";
-      fullPath: "/login";
-      preLoaderRoute: typeof authAuthLoginLazyImport;
-      parentRoute: typeof authAuthLazyImport;
-    };
-    "/(auth)/_auth/register": {
-      id: "/(auth)/_auth/register";
-      path: "/register";
-      fullPath: "/register";
-      preLoaderRoute: typeof authAuthRegisterLazyImport;
-      parentRoute: typeof authAuthLazyImport;
-    };
   }
 }
 
 // Create and export the route tree
 
-interface authAuthLazyRouteChildren {
-  authAuthLoginLazyRoute: typeof authAuthLoginLazyRoute;
-  authAuthRegisterLazyRoute: typeof authAuthRegisterLazyRoute;
-}
-
-const authAuthLazyRouteChildren: authAuthLazyRouteChildren = {
-  authAuthLoginLazyRoute: authAuthLoginLazyRoute,
-  authAuthRegisterLazyRoute: authAuthRegisterLazyRoute,
-};
-
-const authAuthLazyRouteWithChildren = authAuthLazyRoute._addFileChildren(
-  authAuthLazyRouteChildren,
-);
-
 export interface FileRoutesByFullPath {
-  "/": typeof authAuthLazyRouteWithChildren;
+  "/": typeof IndexLazyRoute;
   "/play": typeof PlayIndexRoute;
-  "/login": typeof authAuthLoginLazyRoute;
-  "/register": typeof authAuthRegisterLazyRoute;
 }
 
 export interface FileRoutesByTo {
-  "/": typeof authAuthLazyRouteWithChildren;
+  "/": typeof IndexLazyRoute;
   "/play": typeof PlayIndexRoute;
-  "/login": typeof authAuthLoginLazyRoute;
-  "/register": typeof authAuthRegisterLazyRoute;
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute;
   "/": typeof IndexLazyRoute;
-  "/(auth)/_auth": typeof authAuthLazyRouteWithChildren;
   "/play/": typeof PlayIndexRoute;
-  "/(auth)/_auth/login": typeof authAuthLoginLazyRoute;
-  "/(auth)/_auth/register": typeof authAuthRegisterLazyRoute;
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath;
-  fullPaths: "/" | "/play" | "/login" | "/register";
+  fullPaths: "/" | "/play";
   fileRoutesByTo: FileRoutesByTo;
-  to: "/" | "/play" | "/login" | "/register";
-  id:
-    | "__root__"
-    | "/"
-    | "/(auth)/_auth"
-    | "/play/"
-    | "/(auth)/_auth/login"
-    | "/(auth)/_auth/register";
+  to: "/" | "/play";
+  id: "__root__" | "/" | "/play/";
   fileRoutesById: FileRoutesById;
 }
 
 export interface RootRouteChildren {
   IndexLazyRoute: typeof IndexLazyRoute;
-  authAuthLazyRoute: typeof authAuthLazyRouteWithChildren;
   PlayIndexRoute: typeof PlayIndexRoute;
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexLazyRoute: IndexLazyRoute,
-  authAuthLazyRoute: authAuthLazyRouteWithChildren,
   PlayIndexRoute: PlayIndexRoute,
 };
 
@@ -180,30 +102,14 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
-        "/(auth)/_auth",
         "/play/"
       ]
     },
     "/": {
       "filePath": "index.lazy.tsx"
     },
-    "/(auth)/_auth": {
-      "filePath": "(auth)/_auth.lazy.tsx",
-      "children": [
-        "/(auth)/_auth/login",
-        "/(auth)/_auth/register"
-      ]
-    },
     "/play/": {
       "filePath": "play/index.tsx"
-    },
-    "/(auth)/_auth/login": {
-      "filePath": "(auth)/_auth.login.lazy.tsx",
-      "parent": "/(auth)/_auth"
-    },
-    "/(auth)/_auth/register": {
-      "filePath": "(auth)/_auth.register.lazy.tsx",
-      "parent": "/(auth)/_auth"
     }
   }
 }

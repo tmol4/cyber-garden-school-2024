@@ -21,12 +21,14 @@
     transition-timing-function: star4.easing(emphasized)
 
     &__header
+      appearance: none
       outline: none
       border: none
-      // background-color: star4.color(surface-container-highest)
+      background: none
       cursor: pointer
 
       position: relative
+      width: 100%
       display: flex
       align-items: center
       justify-content: space-between
@@ -39,6 +41,13 @@
       color: star4.color(on-secondary-container)
       --star4-component-ripple-hover-color: #{star4.color(on-secondary-container)}
       --star4-component-ripple-pressed-color: #{star4.color(on-secondary-container)}
+    &__focus-ring
+      inset: 8px
+      border-radius: star4.shape(small)
+
+      transition-property: inset
+      transition-duration: star4.duration(long2)
+      transition-timing-function: star4.easing(emphasized)
     &__headline
       @include star4.typescale(title, medium)
       font-family: var(--star4-typeface-brand)
@@ -47,16 +56,28 @@
       transition-timing-function: star4.easing(emphasized)
 
     &__icon
-      position: relative
-      display: flex
-      align-items: center
-      justify-content: center
+      // position: relative
+      // display: flex
+      // align-items: center
+      // justify-content: center
 
-      transform-origin: center
+      // transform-origin: center
 
-      transition-property: transform
-      transition-duration: star4.duration(long2)
-      transition-timing-function: star4.easing(emphasized)
+      // transition-property: transform
+      // transition-duration: star4.duration(long2)
+      // transition-timing-function: star4.easing(emphasized)
+
+      fill: none
+      stroke: currentcolor
+      stroke-width: 2px
+      width: 24
+      height: 24
+
+      & > path
+        transition-property: d
+        transition-duration: star4.duration(long2)
+        transition-timing-function: star4.easing(emphasized)
+
 
     &__content-wrapper
       position: relative
@@ -89,10 +110,10 @@
         color: star4.color(on-surface)
         --star4-component-ripple-hover-color: #{star4.color(on-surface)}
         --star4-component-ripple-pressed-color: #{star4.color(on-surface)}
+      & .accordion__item__focus-ring
+        inset: 16px
       & .accordion__item__headline
         @include star4.typescale(title, large)
-      & .accordion__item__icon
-        transform: rotate(180deg)
       & .accordion__item__content-wrapper
         grid-template-rows: 1fr
         opacity: 1

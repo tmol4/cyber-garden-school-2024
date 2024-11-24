@@ -1,4 +1,4 @@
-import { createIdentifiableElement, MaterialSymbol, Ripple } from "@star4/react";
+import { createIdentifiableElement, FocusRing, MaterialSymbol, Ripple } from "@star4/react";
 import { Children, createContext, forwardRef, memo, useContext, useEffect, useRef, useState, type HTMLAttributes, type ReactNode } from "react"
 import clsx from "clsx";
 
@@ -119,7 +119,7 @@ const AccordionItemComponent = forwardRef<AccordionItem.Element, AccordionItem.P
     forwardedRef,
   ) {
     const ref = useRef<HTMLDivElement>(null);
-    const headerRef = useRef<HTMLDivElement>(null);
+    const headerRef = useRef<HTMLButtonElement>(null);
 
     const { isFirst, isLast } = useAccordionItem();
 
@@ -137,18 +137,31 @@ const AccordionItemComponent = forwardRef<AccordionItem.Element, AccordionItem.P
           )
         }
         aria-expanded={expanded}>
-        <div
+        <button
           ref={headerRef}
           className={styles["accordion__item__header"]}
           onClick={() => setExpanded(prev => !prev)}>
             <Ripple for={headerRef} />
+            <FocusRing for={headerRef} className={styles["accordion__item__focus-ring"]} />
             <h3 className={styles["accordion__item__headline"]}>
               {headline}
             </h3>
-            <div className={styles["accordion__item__icon"]}>
+            {/* <div className={styles["accordion__item__icon"]}>
               <MaterialSymbol name="expand_more" />
-            </div>
-        </div>
+            </div> */}
+            <svg
+              className={styles["accordion__item__icon"]}
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              width={24}
+              height={24}>
+                <path d={
+                  expanded
+                    ? "M 6.7 8.7 L 12 14 L 17.3 8.7"
+                    : "M 6.7 14.7 L 12 9.4 L 17.3 14.7"
+                } />
+            </svg>
+        </button>
         <div className={styles["accordion__item__content-wrapper"]}>
           <div className={styles["accordion__item__content"]}>
             <div className={styles["accordion__item__padding"]}>

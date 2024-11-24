@@ -75,7 +75,7 @@ const HeaderComponent = forwardRef<Header.Element, Header.Props>(
               {leading}
             </div>
             <span className={styles["header__headline"]}>{headline}</span>
-            <div className={styles["headline__trailing"]}>
+            <div className={styles["header__trailing"]}>
               {trailing}
             </div>
           </div>

@@ -1,4 +1,4 @@
-import { Divider, Lenis } from "@star4/react";
+import { Divider, IconButton, Lenis, MaterialSymbol } from "@star4/react";
 import { createRootRoute, createRootRouteWithContext, Outlet } from "@tanstack/react-router";
 import { lazy, Suspense, type HTMLAttributes } from "react";
 import { Glossary } from "~/components/glossary";
@@ -38,7 +38,16 @@ export const Route = createRootRouteWithContext<RootRouteContext>()({
       }}>
         <Lenis>
           <AppContextProvider>
-            <Header headline="Budget helper" trailing={<Glossary />} />
+            <Header
+              headline="Budget helper"
+              trailing={
+                <>
+                  {/* <IconButton
+                    variant="filledTonal"
+                    icon={<MaterialSymbol name="help" />} /> */}
+                  <Glossary />
+                </>
+              } />
             <Outlet />
             <Suspense>
               <ReactQueryDevtools />
