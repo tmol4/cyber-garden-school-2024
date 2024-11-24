@@ -25,7 +25,7 @@ def make_analytic_text_from_history(history: str):
             analytic_text = events.get(event_id).answers.get(answer_id).analytic_text
             
             if analytic_text:
-                result.append()
+                result.append(analytic_text)
 
     return result
 
@@ -64,10 +64,14 @@ def get_random_event(history: str):
     return events.get(event_ids[rand_index])
 
 
-def make_on_event_json_response(db, user: User) -> dict:
+def make_on_event_json_response(db, user_id: str) -> dict:
+    
+    user = db.get_user(user_id)
+    
     if user.money <= 0:
         _type = "end"
-        return {"type": _type, "data": {"result": "lose"}}
+        analytic = make_analytic_text_from_history(user.history)
+        return {"type": _type, "data": {"result": "lose", "analytic": analytic}}
     
     if get_history_length(user) >= 10:
         _type = "end"
@@ -79,7 +83,7 @@ def make_on_event_json_response(db, user: User) -> dict:
 
     db.add_event_to_user_history(_id=user._id, event_id=event._id)
     
-    user = db.get_user(user._id)
+    user = db.get_user(user_id)
     
     _type = "event"
     data = {"event": event.to_json(), "user": user.to_json()}

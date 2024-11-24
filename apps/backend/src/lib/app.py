@@ -54,7 +54,7 @@ def get_data():
     print(f"user: {user.to_json()}")
 
     if not data:
-        return make_on_event_json_response(db, user)
+        return make_on_event_json_response(db, user_id)
 
     anwser_id = data.get('clickedId')
 
@@ -68,7 +68,7 @@ def get_data():
 
     print(f"answer: {answer.to_json()}")
     
-    return make_on_event_json_response(db, user)
+    return make_on_event_json_response(db, user_id)
     
 
 @app.route("/create_user", methods=['POST'])
@@ -79,7 +79,7 @@ def create_user():
     
     if not user_id:
         user_id = str(uuid.uuid4())
-        db.create_user(_id=user_id, money=25000)
+        db.create_user(_id=user_id, money=15000)
     
     user = db.get_user(user_id)
     
