@@ -40,7 +40,7 @@ def close_connection(exception):
 
 
 @app.route('/event', methods=['POST'])
-@cross_origin()
+@cross_origin(origins=["*"])
 def get_data():
     data = request.get_json()
     print(f"recieved data: {data}")
@@ -75,7 +75,7 @@ def get_data():
 
 
 @app.route("/create_user", methods=['POST'])
-@cross_origin()
+@cross_origin(origins=["*"])
 def create_user():
     user_id = request.cookies.get('user_id')
     db = get_db()
@@ -95,7 +95,7 @@ def create_user():
 
 
 @app.route('/get_user_id', methods=['GET'])
-@cross_origin()
+@cross_origin(origins=["*"])
 def get_user_id():
     user_id = request.cookies.get('user_id')
     if not user_id:
@@ -104,7 +104,7 @@ def get_user_id():
 
 
 @app.route('/delete_user_id', methods=['POST'])
-@cross_origin()
+@cross_origin(origins=["*"])
 def delete_cookie():
     user_id = request.cookies.get('user_id')
     if not user_id:
@@ -119,7 +119,7 @@ def delete_cookie():
 
 
 @app.route('/session', methods=['GET', 'POST', 'DELETE'])
-@cross_origin()
+@cross_origin(origins=["*"])
 def session():
     user_id = request.cookies.get('session_id')
     if request.method == 'GET':
