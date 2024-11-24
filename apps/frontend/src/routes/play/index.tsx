@@ -33,7 +33,8 @@ const createSession = async () => {
     url,
     {
       method: "POST",
-      credentials: "include",
+      // credentials: "include",
+      mode: "no-cors",
       headers: {
         "Accept": "application/json",
         "Content-Type": "application/json"
@@ -51,7 +52,8 @@ const fetchNextEvent = async (id?: string) => {
     url,
     {
       method: "POST",
-      credentials: "include",
+      // credentials: "include",
+      mode: "no-cors",
       headers: {
         "Accept": "application/json",
         "Content-Type": "application/json"

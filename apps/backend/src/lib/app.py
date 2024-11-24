@@ -22,12 +22,13 @@ def get_db() -> DB:
         db = g._database = DB("db.db")
         db.connect()
     return db
-    
+
 
 
 @app.after_request
 def apply_caching(response: Response):
     response.headers['Access-Control-Allow-Credentials'] = 'true'
+    response.headers['Content-Security-Policy'] = 'upgrade-insecure-requests'
     return response
 
 
@@ -69,22 +70,22 @@ def get_data():
     db.add_answer_to_user_history(_id=user_id, answer_id=answer._id)
 
     print(f"answer: {answer.to_json()}")
-    
+
     return make_on_event_json_response(db, user_id)
-    
+
 
 @app.route("/create_user", methods=['POST'])
 @cross_origin()
 def create_user():
     user_id = request.cookies.get('user_id')
     db = get_db()
-    
+
     if not user_id:
         user_id = str(uuid.uuid4())
         db.create_user(_id=user_id, money=15000)
-    
+
     user = db.get_user(user_id)
-    
+
     data = return_last_data(user)
     response = make_response(jsonify(data))
 
