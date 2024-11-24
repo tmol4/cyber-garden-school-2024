@@ -94,6 +94,11 @@ def make_on_event_json_response(db, user_id: str) -> dict:
 
 
 def return_last_data(user: User):
+    if user.money <= 0:
+        _type = "end"
+        analytic = make_analytic_text_from_history(user.history)
+        return {"type": _type, "data": {"result": "lose", "analytic": analytic}}
+    
     last_event = get_latest_event_from_history(user.history)
     
     if last_event is None:
