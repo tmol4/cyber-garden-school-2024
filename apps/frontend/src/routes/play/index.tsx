@@ -1,10 +1,14 @@
-import { Button, CircularProgress } from "@star4/react";
-import { createFileRoute, useRouteContext, useRouter } from "@tanstack/react-router";
+import { Button, CircularProgress, MaterialSymbol } from "@star4/react";
+import { createFileRoute, useNavigate, useRouteContext, useRouter } from "@tanstack/react-router";
 import { queryOptions, useMutation, useQuery, useSuspenseQuery, type QueryClient, type UseMutationResult } from "@tanstack/react-query";
 
 import styles from "./index.module.sass";
-import { createContext, memo, Suspense, useContext, useEffect } from "react";
+import { createContext, memo, Suspense, useContext, useEffect, useMemo } from "react";
 import { API_ENDPOINT, type APIEndingSession, type APIEvent, type APIEventSession, type APIIntroSession, type APISession } from "~/utils";
+import introImage from "~/assets/images/person.jpg";
+import homeImage from "~/assets/images/home.jpeg";
+import shopImage from "~/assets/images/shop.jpeg";
+import streetImage from "~/assets/images/street.jpeg";
 
 const wait = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 
@@ -86,7 +90,6 @@ export const Route = createFileRoute("/play/")({
 
     return (
       <main>
-        {JSON.stringify(data)}
         {status === "pending" && (
             <div className={styles["loading-indicator"]}>
               <CircularProgress />
@@ -98,7 +101,8 @@ export const Route = createFileRoute("/play/")({
             value={{
               queryClient,
               session: data!,
-              mutation,
+              next: mutation,
+              deleteUser: undefined,
             }}>
               <Game />
           </GameContext.Provider>
@@ -111,7 +115,8 @@ export const Route = createFileRoute("/play/")({
 type GameContext = {
   queryClient: QueryClient;
   session: APISession;
-  mutation: UseMutationResult<APISession, Error, string | undefined, unknown>;
+  next: UseMutationResult<APISession, Error, string | undefined, unknown>;
+  deleteUser: undefined;
 }
 const GameContext = createContext<GameContext | undefined>(undefined);
 const useGame = () => {
@@ -145,15 +150,76 @@ function IntroComponent(
     session
   }: Intro.Props,
 ) {
-  const { mutation } = useGame();
+  const { next } = useGame();
+  const navigate = useNavigate({
+    from: "/play",
+  });
   return (
-    <div>
-      {JSON.stringify(session)}
-      <Button variant="filled" label="Далее" onClick={() => mutation.mutate(undefined)} />
+    <div className={styles["intro"]}>
+      <div className={styles["intro__background"]}>
+        <img
+          className={styles["intro__image"]}
+          src={introImage}
+          alt="Шаурмист" />
+      </div>
+      <div className={styles["intro__content"]}>
+        <div className={styles["intro__header"]}>
+          <h1 className={styles["intro__headline"]}>
+            Начало игры
+          </h1>
+          <p className={styles["intro_supporting-text"]}>
+            Вам предстоит играть за начинающего бизнесмена-шаурмиста в суровых реалях России.
+          </p>
+        </div>
+        <div className={styles["intro__actions"]}>
+          <Button
+            onClick={() => navigate({ to: "/" })}
+            variant="outlined"
+            label="Отмена" />
+          <Button
+            className={styles["intro__continue-button"]}
+            variant="filled"
+            icon={<MaterialSymbol name="rocket_launch" />}
+            label="Поехали"
+            onClick={() => next.mutate(undefined)} />
+        </div>
+      </div>
     </div>
   );
 }
+
+function StatsComponent() {
+  const { session } = useGame();
+  const user = session.data.user;
+  return (
+    <div className={styles["stats"]}>
+      <div className={styles["stats__item"]}>
+        <MaterialSymbol name="credit_card" />
+        <div className={styles["stats__content"]}>
+          <span className={styles["stats__headline"]}>Кредит</span>
+          <span className={styles["stats__supporting-text"]}>{user.credit}</span>
+        </div>
+      </div>
+      <div className={styles["stats__item"]}>
+        <MaterialSymbol name="currency_ruble" />
+        <div className={styles["stats__content"]}>
+          <span className={styles["stats__headline"]}>Баланс</span>
+          <span className={styles["stats__supporting-text"]}>{user.money}</span>
+        </div>
+      </div>
+    </div>
+  )
+}
+const Stats = memo(StatsComponent);
+
 const Intro = memo(IntroComponent);
+
+const IMAGES = {
+  home: homeImage,
+  shop: shopImage,
+  street: streetImage,
+} as const;
+
 namespace Question {
   export type Props = {
     session: APIEventSession;
@@ -165,18 +231,44 @@ function QuestionComponent(
     session
   }: Question.Props,
 ) {
-  const { mutation } = useGame();
+  const { next } = useGame();
   const answers = Object.values(session.data.event.answers);
+  const image = useMemo(
+    () => {
+      const key = session.data.event.image;
+      if(key in IMAGES) return IMAGES[key as keyof typeof IMAGES];
+      return undefined;
+    },
+    [session.data.event.image],
+  );
+  const event = session.data.event;
   return (
-    <div>
-      {answers.map(
-        answer => (
-          <Button
-            variant="elevated"
-            onClick={() => mutation.mutate(answer.id)}
-            label={answer.text} />
-        )
-      )}
+    <div className={styles["question"]}>
+      <Stats />
+      <div className={styles["question__background"]}>
+        <img
+          className={styles["question__image"]}
+          src={image}
+          alt="Изображение" />
+      </div>
+      <div className={styles["question__content"]}>
+        <div className={styles["question__header"]}>
+          <h1 className={styles["question__description"]}>
+            {event.description}
+          </h1>
+        </div>
+        <div className={styles["question__actions"]}>
+          {answers.map(
+            (answer, index) => (
+              <Button
+                key={index}
+                variant="elevated"
+                onClick={() => next.mutate(answer.id)}
+                label={answer.text} />
+            )
+          )}
+        </div>
+      </div>
     </div>
   );
 }
@@ -190,11 +282,22 @@ namespace Ending {
 }
 
 const EndingComponent = function(
-  {}: Ending.Props,
+  {
+    session
+  }: Ending.Props,
 ) {
   return (
     <div>
-
+      {session.data.result === "win" && (
+        <h1>
+          Победа!
+        </h1>
+      )}
+      {session.data.result === "lose" && (
+        <h1>
+          Поражение...
+        </h1>
+      )}
     </div>
   )
 }

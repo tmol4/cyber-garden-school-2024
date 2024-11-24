@@ -1,5 +1,8 @@
 export type APIIntroSession = {
   type: "intro";
+  data: {
+    user: APIUser;
+  };
 }
 
 export type APIEventSession = {
@@ -15,10 +18,12 @@ export type APIEndingSession = {
   data:
     | {
       result: "win";
+      user: APIUser;
     }
     | {
-      result: "end";
+      result: "lose";
       analytic: string[],
+      user: APIUser;
     };
 }
 
