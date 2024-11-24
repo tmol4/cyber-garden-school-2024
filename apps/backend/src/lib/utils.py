@@ -99,6 +99,11 @@ def return_last_data(user: User):
         analytic = make_analytic_text_from_history(user.history)
         return {"type": _type, "data": {"result": "lose", "analytic": analytic}}
     
+    if get_history_length(user) >= 10:
+        _type = "end"
+        analytic = make_analytic_text_from_history(user.history)
+        return {"type": _type, "data": {"result": "win", "analytic": analytic}}
+    
     last_event = get_latest_event_from_history(user.history)
     
     if last_event is None:
