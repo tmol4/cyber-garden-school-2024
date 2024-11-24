@@ -165,9 +165,23 @@
   max-width: 840px
   margin-inline: auto
 
+  display: flex
+  align-items: center
+  justify-content: center
+  gap: 16px
+
+  padding-inline: 16px
+  padding-block: 24px
+
   &__heading
     @include star4.typescale(headline, large)
+
     &--success
       color: star4.color(primary)
     &--error
       color: star4.color(error)
+  &__answer
+    border-radius: star4.shape(medium)
+    background-color: star4.color(surface-container-highest)
+    padding-block: 16px
+    padding-inline: 24px

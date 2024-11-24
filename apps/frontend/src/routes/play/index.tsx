@@ -128,6 +128,7 @@ const useGame = () => {
 
 function GameComponent() {
   const { session } = useGame();
+  console.log(session.type)
   return (
     <>
       {session.type === "intro" && <Intro session={session} />}
@@ -286,6 +287,9 @@ const EndingComponent = function(
     session
   }: Ending.Props,
 ) {
+  const answers = session.data.result === "lose"
+    ? session.data.analytic
+    : [];
   return (
     <div>
       {session.data.result === "win" && (
@@ -298,6 +302,15 @@ const EndingComponent = function(
           Поражение...
         </h1>
       )}
+      <div>
+        {answers.map(
+          (answer, index) => (
+            <div className={styles["ending__answer"]}>
+              {answer}
+            </div>
+          )
+        )}
+      </div>
     </div>
   )
 }
