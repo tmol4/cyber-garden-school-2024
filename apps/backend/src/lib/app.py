@@ -62,7 +62,7 @@ def get_data():
     answer = event.answers.get(anwser_id)
 
     db.set_user_money(_id=user_id, money=user.money + answer.delta_money - user.credit * 0.1)
-    db.set_user_credit(_id=user_id, credit=user.credit * 0.9 if user.credit * 0.1 >= 20 else 0)
+    db.set_user_credit(_id=user_id, credit=user.credit * 0.9 if user.credit * 0.1 >= 100 else 0)
 
     db.add_answer_to_user_history(_id=user_id, answer_id=answer._id)
 

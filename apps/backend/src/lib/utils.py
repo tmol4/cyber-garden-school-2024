@@ -21,7 +21,11 @@ def make_analytic_text_from_history(history: str):
         ids = pair.split(HISTORY_ANSWER_SEP)
         if len(ids) == 2:
             event_id, answer_id = ids
-            result.append(events.get(event_id).answers.get(answer_id).analytic_text)
+            
+            analytic_text = events.get(event_id).answers.get(answer_id).analytic_text
+            
+            if analytic_text:
+                result.append()
 
     return result
 
