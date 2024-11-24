@@ -1,5 +1,15 @@
 {
     "recommendations": [
-        "editorconfig.editorconfig"
+        "editorconfig.editorconfig",
+        "yoavbls.pretty-ts-errors",
+        "fill-labs.dependi",
+        "github.vscode-github-actions",
+        "remcohaszing.schemastore",
+        "ms-vscode.live-server",
+        "ms-vsliveshare.vsliveshare",
+        "tyriar.lorem-ipsum",
+        "unifiedjs.vscode-mdx",
+        "mrmlnc.vscode-scss",
+        "rangav.vscode-thunder-client"
     ]
 }
