@@ -1,0 +1,28 @@
+@use "~/sass/star4"
+
+.last-section
+  display: flex
+  flex-direction: column
+  text-align: center
+  margin-top: 5rem
+  @include star4.layout(compact, compact)
+    margin-top: 10rem
+  &__container
+    border: solid .1rem black
+    border-radius: 3rem
+    padding: 1rem
+    margin-bottom: 3rem
+  &__p
+    font-size: 1rem
+    @include star4.layout(compact, compact)
+    font-size: 1.3rem
+    line-height: 130%
+    @include star4.typescale(body, large)
+  &__h2
+    font-size: 1.5rem
+    text-align: center
+    margin-bottom: 5rem
+    @include star4.typescale(headline, medium)
+    @include star4.layout(compact, compact)
+      font-size: 1.5rem
+      line-height: 130%
