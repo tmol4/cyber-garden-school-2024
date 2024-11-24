@@ -61,8 +61,9 @@ events_good = {
         delta_money=0,
         image="shop",
         answers={
-            "1": Answer(_id="1", text="Взять микрозайм для покупки соуса", chance_bad=20, credit=5000, delta_money=5000, analytic_text="Брать микрозайм чаще всего очень плохая идея, лучше накопить денег или снять их со сберегательного счёта"),
-            "2": Answer(_id="2", text="Ничего не делать", chance_bad=70, analytic_text="")
+            "1": Answer(_id="1", text="Взять микрозайм для покупки соуса", chance_bad=20, credit=5000, delta_money=0, analytic_text="Брать микрозайм чаще всего очень плохая идея, лучше накопить денег или снять их со сберегательного счёта"),
+            "2": Answer(_id="2", text="Ничего не делать", chance_bad=70, delta_money=-3000, analytic_text="Из-за того, что вы решили не использовать популярный соус ваши клиенты ушли к конкурентам. "),
+            "3": Answer(_id="3", text="Продумать какие ещё улучшения вы можете сделать в вашем бизнесе и взять кредит для их выполнения", credit=5000, delta_money=3000)
         }
     ),
     "7": Event(
@@ -71,8 +72,8 @@ events_good = {
         delta_money=0,
         image="shop",
         answers={
-            "1": Answer(_id="1", text="Платить им больше зп", chance_bad=0, delta_money=-5000, analytic_text=""),
-            "2": Answer(_id="2", text="Нанять польностью новый персонал", chance_bad=30, analytic_text="Полностью новый персонал может вызвать ещё больше проблем, так что лучше было бы разрешать конфликты в старом составе")
+            "1": Answer(_id="1", text="Платить им больше зп", chance_bad=0, delta_money=-1000, analytic_text=""),
+            "2": Answer(_id="2", text="Нанять польностью новый персонал", chance_bad=30, delta_money=-5000, analytic_text="Полностью новый персонал может вызвать ещё больше проблем, так что лучше было бы разрешать конфликты в старом составе")
         }
     ),
     "8": Event(
@@ -81,9 +82,9 @@ events_good = {
         delta_money=0,
         image="home",
         answers={
-            "1": Answer(_id="1", text="Инвестируете их в акции компании Z", chance_bad=10, analytic_text=""),
-            "2": Answer(_id="2", text="Купить аркану в DOTA 2", chance_bad=80, analytic_text="Аркана в DOTA 2 к сожалению не поможет продвижению бизнеса"),
-            "3": Answer(_id="3", text="Положить их на сберегательный счёт", chance_bad=0, analytic_text="")
+            "1": Answer(_id="1", text="Инвестируете их в акции компании Z", chance_bad=10, delta_money=0, analytic_text=""),
+            "2": Answer(_id="2", text="Купить аркану в DOTA 2", chance_bad=80, delta_money=-1000, analytic_text="Аркана в DOTA 2 к сожалению не поможет продвижению бизнеса"),
+            "3": Answer(_id="3", text="Положить их на сберегательный счёт", delta_money=3000, chance_bad=0, analytic_text="")
         }
     ),
     "9": Event(
@@ -94,7 +95,7 @@ events_good = {
         answers={
             "1": Answer(_id="1", text="Взять кредит", credit=5000, delta_money=5000, chance_bad=20),
             "2": Answer(_id="2", text="Ограничить ненужные расходы", chance_bad=0, analytic_text=""),
-            "3": Answer(_id="3", text="Сэкономить на производстве", chance_bad=80, analytic_text="Клиенты могут заметить, что вы экономите на производстве, и они уйдут к конкурентам")
+            "3": Answer(_id="3", text="Сэкономить на производстве", chance_bad=80, delta_money=-2000, analytic_text="Клиенты могут заметить, что вы экономите на производстве, и они уйдут к конкурентам")
         }
     ),
     "10": Event(
@@ -103,8 +104,8 @@ events_good = {
         delta_money=0,
         image="street",
         answers={
-            "1": Answer(_id="1", text="Тоже понизить цену на шаурму", chance_bad=40, analytic_text="Это плохое решение, так как вы начали работаь себе в убыток"),
-            "2": Answer(_id="2", text="Провести маркетинговую кампанию", chance_bad=0, delta_money=-5000, analytic_text=""),
+            "1": Answer(_id="1", text="Тоже понизить цену на шаурму", chance_bad=40, delta_money=-1500, analytic_text="Это плохое решение, так как вы начали работаь себе в убыток"),
+            "2": Answer(_id="2", text="Провести маркетинговую кампанию", chance_bad=0, delta_money=500, analytic_text=""),
         }
     ),
 }
