@@ -168,7 +168,7 @@
   display: flex
   align-items: center
   justify-content: center
-  gap: 16px
+  gap: 24px
 
   padding-inline: 16px
   padding-block: 24px
@@ -180,6 +180,12 @@
       color: star4.color(primary)
     &--error
       color: star4.color(error)
+  &__answers
+    display: flex
+    flex-direction: column
+    align-items: stretch
+    justify-content: center
+    gap: 16px
   &__answer
     border-radius: star4.shape(medium)
     background-color: star4.color(surface-container-highest)

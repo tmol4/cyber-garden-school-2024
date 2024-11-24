@@ -9,6 +9,7 @@ import introImage from "~/assets/images/person.jpg";
 import homeImage from "~/assets/images/home.jpeg";
 import shopImage from "~/assets/images/shop.jpeg";
 import streetImage from "~/assets/images/street.jpeg";
+import clsx from "clsx";
 
 const wait = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 
@@ -293,19 +294,26 @@ const EndingComponent = function(
   return (
     <div>
       {session.data.result === "win" && (
-        <h1>
+        <h1 className={clsx(
+          styles["ending__heading"],
+          styles["ending__heading--success"],
+
+        )}>
           Победа!
         </h1>
       )}
       {session.data.result === "lose" && (
-        <h1>
+        <h1 className={clsx(
+          styles["ending__heading"],
+          styles["ending__heading--error"],
+        )}>
           Поражение...
         </h1>
       )}
-      <div>
+      <div className={styles["ending__answers"]}>
         {answers.map(
           (answer, index) => (
-            <div className={styles["ending__answer"]}>
+            <div key={index} className={styles["ending__answer"]}>
               {answer}
             </div>
           )

@@ -1,4 +1,4 @@
-import { createLazyFileRoute, Link } from "@tanstack/react-router";
+import { createLazyFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { SectionHello } from "~/components/section-hello";
 import { Hero } from "~/components/hero-old";
 
@@ -14,6 +14,7 @@ export const Route = createLazyFileRoute("/")({
 });
 
 function Index() {
+  const navigate = useNavigate({ from: "/" });
   return (
     <main>
       <div className={styles["wrapper"]}>
@@ -31,11 +32,12 @@ function Index() {
                 </p>
               </div>
               <div className={styles["hero__actions"]}>
-                <Button variant="filled" leadingIcon={<MaterialSymbol name="stadia_controller" />} label="Играть!" />
+                {/* <Button variant="filled" leadingIcon={<MaterialSymbol name="stadia_controller" />} label="Играть!" /> */}
                 <ActionButton
+                  onClick={() => navigate({ to: "/play" })}
                   icon={<ArrowForward />}
                   label="Играть!" />
-                <HeroButton />
+                {/* <HeroButton /> */}
               </div>
             </div>
           </Theme>
